@@ -28,16 +28,19 @@ export function splitIntoHoneycombRows<T>(items: T[]): T[][] {
 
 /** 노드 ID 기반 플레이스홀더 그라데이션 색상 */
 const GRADIENTS: Record<string, string> = {
-  // 대륙
+  // 6대주
+  asia: "from-rose-500 to-red-700",
   europe: "from-blue-500 to-indigo-700",
-  "east-asia": "from-rose-500 to-red-700",
-  "southeast-asia": "from-emerald-400 to-teal-700",
-  "middle-east": "from-amber-500 to-orange-700",
   africa: "from-yellow-500 to-amber-700",
   "north-america": "from-sky-400 to-blue-700",
-  "central-america": "from-lime-500 to-green-700",
   "south-america": "from-fuchsia-500 to-purple-700",
   oceania: "from-cyan-400 to-sky-700",
+  // 아시아 권역
+  "east-asia": "from-rose-400 to-red-600",
+  "southeast-asia": "from-emerald-400 to-teal-700",
+  "south-asia": "from-orange-400 to-rose-600",
+  "central-asia": "from-amber-400 to-orange-600",
+  "middle-east": "from-amber-500 to-orange-700",
   // 유럽 권역
   "western-europe": "from-blue-400 to-blue-600",
   "central-europe": "from-indigo-400 to-indigo-600",

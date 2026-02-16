@@ -43,9 +43,10 @@ export default function HexGrid({ items, levelKey, onSelect }: HexGridProps) {
         {rows.map((row, rowIndex) => (
           <div
             key={rowIndex}
-            className="flex justify-center"
+            className="relative flex justify-center"
             style={{
               marginTop: rowIndex > 0 ? "calc(var(--hex-size, 180px) * -0.28)" : 0,
+              zIndex: rows.length - rowIndex,
             }}
           >
             {row.map((item) => {
