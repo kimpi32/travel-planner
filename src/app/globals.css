@@ -155,3 +155,27 @@
   margin: 0 2px;
   filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.15));
 }
+
+/* 권역용 소형 육각 타일 */
+:root {
+  --region-hex: 140px;
+}
+
+@media (max-width: 768px) {
+  :root {
+    --region-hex: 110px;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --region-hex: 90px;
+  }
+}
+
+.region-hex {
+  width: var(--region-hex);
+  aspect-ratio: 1 / 1.1547;
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  overflow: hidden;
+}
