@@ -1,8 +1,9 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { ArrowLeft, MapPin, Sparkles } from "lucide-react";
+import { ArrowLeft, MapPin, Sparkles, ArrowRight } from "lucide-react";
 import { geoNodes } from "@/data/geography";
 import { countryDetails, type CityInfo } from "@/data/country-details";
+import { cityDetails, slugify } from "@/data/city-details";
 import AiEstimateSidebar from "@/components/destination/AiEstimateSidebar";
 
 interface RegionPageProps {
@@ -31,8 +32,8 @@ export async function generateMetadata({ params }: RegionPageProps) {
   };
 }
 
-function CityCard({ city, index }: { city: CityInfo; index: number }) {
-  return (
+function CityCard({ city, index, href }: { city: CityInfo; index: number; href?: string }) {
+  const content = (
     <div className="group overflow-hidden rounded-2xl border bg-card transition-all hover:shadow-lg">
       {/* 도시 히어로 */}
       <div className={`relative h-44 bg-gradient-to-br ${city.gradient} p-5`}>
@@ -66,9 +67,18 @@ function CityCard({ city, index }: { city: CityInfo; index: number }) {
             ))}
           </div>
         </div>
+
+        {href && (
+          <div className="mt-4 flex items-center gap-1 text-xs font-semibold text-primary">
+            상세 가이드 보기 <ArrowRight className="h-3 w-3" />
+          </div>
+        )}
       </div>
     </div>
   );
+
+  if (href) return <Link href={href}>{content}</Link>;
+  return content;
 }
 
 export default async function RegionPage({ params }: RegionPageProps) {
@@ -118,9 +128,18 @@ export default async function RegionPage({ params }: RegionPageProps) {
                 </span>
               </div>
               <div className="grid gap-6 sm:grid-cols-2">
-                {region.cities.map((city, i) => (
-                  <CityCard key={city.nameEn} city={city} index={i} />
-                ))}
+                {region.cities.map((city, i) => {
+                  const cSlug = slugify(city.nameEn);
+                  const hasDetail = !!cityDetails[`${slug}/${regionSlug}/${cSlug}`];
+                  return (
+                    <CityCard
+                      key={city.nameEn}
+                      city={city}
+                      index={i}
+                      href={hasDetail ? `/destination/${slug}/${regionSlug}/${cSlug}` : undefined}
+                    />
+                  );
+                })}
               </div>
             </section>
 
