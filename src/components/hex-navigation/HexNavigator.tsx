@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useMemo, useCallback } from "react";
+import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { geoNodes } from "@/data/geography";
 import { buildGeoTree, getChildren, getBreadcrumbs } from "@/lib/geo-tree";
@@ -9,6 +10,7 @@ import HexGrid from "./HexGrid";
 import HexBreadcrumb from "./HexBreadcrumb";
 
 export default function HexNavigator() {
+  const router = useRouter();
   const tree = useMemo(() => buildGeoTree(geoNodes), []);
   const [scope, setScope] = useState<TravelScope>("international");
   const [currentParentId, setCurrentParentId] = useState<string | null>(null);
@@ -34,11 +36,10 @@ export default function HexNavigator() {
       if (children.length > 0) {
         setCurrentParentId(item.id);
       } else {
-        // 리프 노드 → 여행지 상세 페이지 (추후 구현)
-        console.log("Navigate to destination:", item.slug);
+        router.push(`/destination/${item.slug}`);
       }
     },
-    [tree],
+    [tree, router],
   );
 
   const handleBreadcrumbNavigate = useCallback((nodeId: string | null) => {
