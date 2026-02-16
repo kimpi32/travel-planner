@@ -124,3 +124,34 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* ============================================================
+   육각 타일 스타일
+   ============================================================ */
+:root {
+  --hex-size: 180px;
+}
+
+@media (max-width: 768px) {
+  :root {
+    --hex-size: 130px;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --hex-size: 105px;
+  }
+}
+
+.hex-tile {
+  width: var(--hex-size);
+  aspect-ratio: 1 / 1.1547;
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  overflow: hidden;
+}
+
+.hex-wrapper {
+  margin: 0 2px;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.15));
+}
