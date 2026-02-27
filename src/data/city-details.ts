@@ -82,6 +82,91 @@ export function getAttractionDetail(
 }
 
 // --- country data imports (barrel) ---
+// Western Europe
 import { germanyCityDetails, germanyAttractionDetails } from "./city-details/germany";
-Object.assign(cityDetails, germanyCityDetails);
-Object.assign(attractionDetails, germanyAttractionDetails);
+import { germanyCityDetails2, germanyAttractionDetails2 } from "./city-details/germany-extra-1";
+import { germanyCityDetails3, germanyAttractionDetails3 } from "./city-details/germany-extra-2";
+import { franceCityDetails, franceAttractionDetails } from "./city-details/france";
+import { franceCityDetails2, franceAttractionDetails2 } from "./city-details/france-extra";
+import { ukCityDetails, ukAttractionDetails } from "./city-details/uk";
+import { netherlandsCityDetails, netherlandsAttractionDetails } from "./city-details/netherlands";
+import { netherlandsCityDetails2, netherlandsAttractionDetails2 } from "./city-details/netherlands-extra";
+import { belgiumCityDetails, belgiumAttractionDetails } from "./city-details/belgium";
+import { belgiumCityDetails2, belgiumAttractionDetails2 } from "./city-details/belgium-extra";
+import { irelandCityDetails, irelandAttractionDetails } from "./city-details/ireland";
+import { luxembourgCityDetails, luxembourgAttractionDetails } from "./city-details/luxembourg";
+// Central Europe
+import { czechiaCityDetails, czechiaAttractionDetails } from "./city-details/czechia";
+import { austriaCityDetails, austriaAttractionDetails } from "./city-details/austria";
+import { switzerlandCityDetails, switzerlandAttractionDetails } from "./city-details/switzerland";
+import { polandCityDetails, polandAttractionDetails } from "./city-details/poland";
+import { hungaryCityDetails, hungaryAttractionDetails } from "./city-details/hungary";
+// Southern Europe
+import { italyCityDetails, italyAttractionDetails } from "./city-details/italy";
+import { spainCityDetails, spainAttractionDetails } from "./city-details/spain";
+import { portugalCityDetails, portugalAttractionDetails } from "./city-details/portugal";
+import { greeceCityDetails, greeceAttractionDetails } from "./city-details/greece";
+import { maltaCityDetails, maltaAttractionDetails } from "./city-details/malta";
+// Northern Europe
+import { norwayCityDetails, norwayAttractionDetails } from "./city-details/norway";
+import { swedenCityDetails, swedenAttractionDetails } from "./city-details/sweden";
+import { finlandCityDetails, finlandAttractionDetails } from "./city-details/finland";
+import { denmarkCityDetails, denmarkAttractionDetails } from "./city-details/denmark";
+import { icelandCityDetails, icelandAttractionDetails } from "./city-details/iceland";
+// Balkans
+import { croatiaCityDetails, croatiaAttractionDetails } from "./city-details/croatia";
+import { sloveniaCityDetails, sloveniaAttractionDetails } from "./city-details/slovenia";
+// Middle East
+import { turkeyCityDetails, turkeyAttractionDetails } from "./city-details/turkey";
+import { georgiaCityDetails, georgiaAttractionDetails } from "./city-details/georgia";
+import { uaeCityDetails, uaeAttractionDetails } from "./city-details/uae";
+import { israelCityDetails, israelAttractionDetails } from "./city-details/israel";
+import { jordanCityDetails, jordanAttractionDetails } from "./city-details/jordan";
+import { omanCityDetails, omanAttractionDetails } from "./city-details/oman";
+// East Asia
+import { japanCityDetails, japanAttractionDetails } from "./city-details/japan";
+import { chinaCityDetails, chinaAttractionDetails } from "./city-details/china";
+import { taiwanCityDetails, taiwanAttractionDetails } from "./city-details/taiwan";
+import { mongoliaCityDetails, mongoliaAttractionDetails } from "./city-details/mongolia";
+// Southeast Asia
+import { thailandCityDetails, thailandAttractionDetails } from "./city-details/thailand";
+import { vietnamCityDetails, vietnamAttractionDetails } from "./city-details/vietnam";
+import { indonesiaCityDetails, indonesiaAttractionDetails } from "./city-details/indonesia";
+import { philippinesCityDetails, philippinesAttractionDetails } from "./city-details/philippines";
+import { malaysiaCityDetails, malaysiaAttractionDetails } from "./city-details/malaysia";
+import { singaporeCityDetails, singaporeAttractionDetails } from "./city-details/singapore";
+import { cambodiaCityDetails, cambodiaAttractionDetails } from "./city-details/cambodia";
+// South Asia
+import { indiaCityDetails, indiaAttractionDetails } from "./city-details/india";
+import { nepalCityDetails, nepalAttractionDetails } from "./city-details/nepal";
+import { sriLankaCityDetails, sriLankaAttractionDetails } from "./city-details/sri-lanka";
+// Central Asia
+import { uzbekistanCityDetails, uzbekistanAttractionDetails } from "./city-details/uzbekistan";
+import { kazakhstanCityDetails, kazakhstanAttractionDetails } from "./city-details/kazakhstan";
+
+Object.assign(
+  cityDetails,
+  germanyCityDetails, germanyCityDetails2, germanyCityDetails3, franceCityDetails, franceCityDetails2, ukCityDetails, netherlandsCityDetails, netherlandsCityDetails2, belgiumCityDetails, belgiumCityDetails2, irelandCityDetails, luxembourgCityDetails,
+  czechiaCityDetails, austriaCityDetails, switzerlandCityDetails, polandCityDetails, hungaryCityDetails,
+  italyCityDetails, spainCityDetails, portugalCityDetails, greeceCityDetails, maltaCityDetails,
+  norwayCityDetails, swedenCityDetails, finlandCityDetails, denmarkCityDetails, icelandCityDetails,
+  croatiaCityDetails, sloveniaCityDetails, turkeyCityDetails,
+  georgiaCityDetails, uaeCityDetails, israelCityDetails, jordanCityDetails, omanCityDetails,
+  japanCityDetails, chinaCityDetails, taiwanCityDetails, mongoliaCityDetails,
+  thailandCityDetails, vietnamCityDetails, indonesiaCityDetails, philippinesCityDetails, malaysiaCityDetails, singaporeCityDetails, cambodiaCityDetails,
+  indiaCityDetails, nepalCityDetails, sriLankaCityDetails,
+  uzbekistanCityDetails, kazakhstanCityDetails,
+);
+Object.assign(
+  attractionDetails,
+  germanyAttractionDetails, germanyAttractionDetails2, germanyAttractionDetails3, franceAttractionDetails, franceAttractionDetails2, ukAttractionDetails, netherlandsAttractionDetails, netherlandsAttractionDetails2, belgiumAttractionDetails, belgiumAttractionDetails2, irelandAttractionDetails, luxembourgAttractionDetails,
+  czechiaAttractionDetails, austriaAttractionDetails, switzerlandAttractionDetails, polandAttractionDetails, hungaryAttractionDetails,
+  italyAttractionDetails, spainAttractionDetails, portugalAttractionDetails, greeceAttractionDetails, maltaAttractionDetails,
+  norwayAttractionDetails, swedenAttractionDetails, finlandAttractionDetails, denmarkAttractionDetails, icelandAttractionDetails,
+  croatiaAttractionDetails, sloveniaAttractionDetails, turkeyAttractionDetails,
+  georgiaAttractionDetails, uaeAttractionDetails, israelAttractionDetails, jordanAttractionDetails, omanAttractionDetails,
+  japanAttractionDetails, chinaAttractionDetails, taiwanAttractionDetails, mongoliaAttractionDetails,
+  thailandAttractionDetails, vietnamAttractionDetails, indonesiaAttractionDetails, philippinesAttractionDetails, malaysiaAttractionDetails, singaporeAttractionDetails, cambodiaAttractionDetails,
+  indiaAttractionDetails, nepalAttractionDetails, sriLankaAttractionDetails,
+  uzbekistanAttractionDetails, kazakhstanAttractionDetails,
+);

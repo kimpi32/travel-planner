@@ -136,7 +136,7 @@ export const geoNodes: GeoNode[] = [
     level: "subregion",
     imageUrl: "/images/regions/western-europe.jpg",
     parentId: "europe",
-    childCount: 5,
+    childCount: 6,
   },
   {
     id: "central-europe",
@@ -588,6 +588,16 @@ export const geoNodes: GeoNode[] = [
     level: "country",
     imageUrl: "/images/countries/ireland.jpg",
     icon: "🇮🇪",
+    parentId: "western-europe",
+  },
+  {
+    id: "luxembourg",
+    slug: "luxembourg",
+    name: "룩셈부르크",
+    nameEn: "Luxembourg",
+    level: "country",
+    imageUrl: "/images/countries/luxembourg.jpg",
+    icon: "🇱🇺",
     parentId: "western-europe",
   },
 

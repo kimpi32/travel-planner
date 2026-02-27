@@ -100,6 +100,30 @@ export const countryDetails: Record<string, CountryDetail> = {
             gradient: "from-teal-500 to-emerald-800",
             highlights: ["슈타이너네 다리", "성 페터 대성당", "발할라 신전", "도나우 유람선"],
           },
+          {
+            name: "아우크스부르크",
+            nameEn: "Augsburg",
+            description:
+              "2,000년 역사의 독일에서 가장 오래된 도시 중 하나. 세계 최초의 사회주택 푸게라이와 르네상스 시청사, 모차르트의 아버지 출생지로 유명합니다.",
+            gradient: "from-yellow-500 to-amber-700",
+            highlights: ["푸게라이", "시청사 황금의 방", "모차르트 하우스", "대성당"],
+          },
+          {
+            name: "밤베르크",
+            nameEn: "Bamberg",
+            description:
+              "UNESCO 세계유산 구시가지와 훈제 맥주(라우흐비어)로 유명한 중세 도시. 7개 언덕 위에 세워져 '프랑켄의 로마'로 불리며, 강 위의 구시청사가 상징적입니다.",
+            gradient: "from-amber-600 to-brown-800",
+            highlights: ["구시청사(레그니츠강 위)", "밤베르크 대성당", "라우흐비어 양조장", "소 베니스 지구"],
+          },
+          {
+            name: "가르미슈파르텐키르헨",
+            nameEn: "Garmisch-Partenkirchen",
+            description:
+              "독일 최고봉 추크슈피체(2,962m)의 관문 도시. 바이에른 알프스의 절경 속에서 스키, 하이킹, 등반을 즐길 수 있는 산악 리조트 타운입니다.",
+            gradient: "from-sky-400 to-blue-700",
+            highlights: ["추크슈피체 산 케이블카", "파르트나흐 협곡", "올림피아 스키점프대", "아이프 호수"],
+          },
         ],
         tips: [
           "바이에른 티켓(Bayern-Ticket)으로 하루 종일 지역 교통을 저렴하게 이용하세요.",
@@ -147,6 +171,30 @@ export const countryDetails: Record<string, CountryDetail> = {
               "베를린 바로 옆의 UNESCO 도시. 프로이센 왕가의 상수시 궁전과 정원이 있어 베를린에서 반나절 당일치기로 완벽합니다.",
             gradient: "from-lime-500 to-green-800",
             highlights: ["상수시 궁전", "체칠리엔호프", "네덜란드 지구", "바벨스베르크"],
+          },
+          {
+            name: "에르푸르트",
+            nameEn: "Erfurt",
+            description:
+              "튀링엔주의 주도이자 독일에서 가장 잘 보존된 중세 도시 중 하나. 상점이 늘어선 크레머 다리(상인의 다리)는 유럽에서 가장 긴 거주용 다리이며, 마르틴 루터가 수도사 생활을 한 곳입니다.",
+            gradient: "from-red-500 to-rose-700",
+            highlights: ["크레머 다리", "에르푸르트 대성당", "루터의 아우구스티너 수도원", "피셔마르크트 광장"],
+          },
+          {
+            name: "슈베린",
+            nameEn: "Schwerin",
+            description:
+              "호수 위의 동화 같은 성으로 유명한 메클렌부르크포어포메른 주의 주도. 슈베린 성은 독일에서 가장 아름다운 성 중 하나로, 호수와 정원에 둘러싸여 있습니다.",
+            gradient: "from-cyan-500 to-blue-700",
+            highlights: ["슈베린 성", "슈베리너 호수", "구시가지 마르크트", "대성당"],
+          },
+          {
+            name: "로스토크",
+            nameEn: "Rostock",
+            description:
+              "발트해 연안의 최대 항구도시. 대학도시의 활기와 한자동맹의 역사가 공존하며, 해변 리조트 바르네뮌데에서 백사장과 바다를 즐길 수 있습니다.",
+            gradient: "from-blue-400 to-indigo-600",
+            highlights: ["바르네뮌데 해변", "성 마리엔 교회 천문시계", "크뢰펠리너 거리", "로스토크 항구"],
           },
         ],
         tips: [
@@ -196,6 +244,38 @@ export const countryDetails: Record<string, CountryDetail> = {
             gradient: "from-emerald-400 to-teal-700",
             highlights: ["로렐라이 바위", "마르크스부르크 성", "뤼데스하임", "라인강 유람선"],
           },
+          {
+            name: "아헨",
+            nameEn: "Aachen",
+            description:
+              "카를 대제(샤를마뉴)의 수도였던 역사 도시. 아헨 대성당은 독일 최초의 UNESCO 세계유산이며, 온천과 프린텐(향신료 쿠키)으로도 유명합니다.",
+            gradient: "from-amber-500 to-yellow-700",
+            highlights: ["아헨 대성당", "카를 대제 보물관", "엘리제 분수 온천", "프린텐 쿠키"],
+          },
+          {
+            name: "뮌스터",
+            nameEn: "Münster",
+            description:
+              "자전거의 도시이자 베스트팔렌 조약(1648)이 체결된 역사적 도시. 프린치팔마르크트의 아케이드 건물과 대학도시의 활기가 매력적입니다.",
+            gradient: "from-green-500 to-emerald-700",
+            highlights: ["프린치팔마르크트", "성 파울루스 대성당", "아제 호수", "평화의 전당"],
+          },
+          {
+            name: "트리어",
+            nameEn: "Trier",
+            description:
+              "독일에서 가장 오래된 도시(기원전 16년 건설). 로마 유적이 가장 잘 보존된 곳으로, 포르타 니그라(검은 문)와 황제 목욕탕, 카를 마르크스 생가가 있습니다.",
+            gradient: "from-stone-500 to-gray-700",
+            highlights: ["포르타 니그라", "황제 목욕탕", "카를 마르크스 생가", "트리어 대성당"],
+          },
+          {
+            name: "도르트문트",
+            nameEn: "Dortmund",
+            description:
+              "보루시아 도르트문트(BVB)의 홈, 지그날 이두나 파크가 있는 축구의 도시. 루르 지역 산업 유산과 맥주 문화가 공존하며, 독일 축구 박물관도 이곳에 있습니다.",
+            gradient: "from-yellow-400 to-yellow-600",
+            highlights: ["지그날 이두나 파크", "독일 축구 박물관", "베스트팔렌 공원", "도르트문트 U 타워"],
+          },
         ],
         tips: [
           "쾰른과 뒤셀도르프는 기차로 25분 거리. 하루에 두 도시를 둘러볼 수 있습니다.",
@@ -235,6 +315,30 @@ export const countryDetails: Record<string, CountryDetail> = {
               "한자동맹의 수도였던 역사도시. 홀슈텐 문, 붉은 벽돌 고딕 건축, 그리고 세계적으로 유명한 마지팬(Marzipan)의 본고장입니다.",
             gradient: "from-orange-500 to-amber-800",
             highlights: ["홀슈텐 문", "마지팬 카페", "부덴브로크 하우스", "성 마리엔 교회"],
+          },
+          {
+            name: "하노버",
+            nameEn: "Hanover",
+            description:
+              "니더작센주의 주도이자 박람회의 도시. 헤렌하우젠 왕립 정원은 유럽 최고의 바로크 정원 중 하나이며, 매년 열리는 하노버 메세(산업 박람회)로 유명합니다.",
+            gradient: "from-slate-500 to-gray-700",
+            highlights: ["헤렌하우젠 정원", "신시청사", "마슈 호수", "하노버 동물원"],
+          },
+          {
+            name: "킬",
+            nameEn: "Kiel",
+            description:
+              "발트해 피요르드에 위치한 항구도시이자 슐레스비히홀슈타인 주의 주도. 매년 6월 열리는 킬 주간(Kieler Woche)은 세계 최대의 요트 축제입니다.",
+            gradient: "from-blue-500 to-cyan-700",
+            highlights: ["킬 주간 요트 축제", "킬 피요르드 유람선", "라보에 해군 기념관", "킬 수족관"],
+          },
+          {
+            name: "쥘트",
+            nameEn: "Sylt",
+            description:
+              "북해의 고급 휴양 섬. 독일의 생트로페로 불리며, 끝없는 백사장과 갈대 지붕 가옥, 미슐랭 레스토랑이 어우러진 독일 최고의 해변 리조트입니다.",
+            gradient: "from-amber-400 to-sky-500",
+            highlights: ["베스터란트 해변", "적벽 절벽", "갈대 지붕 가옥 마을", "걸어서 갯벌 체험"],
           },
         ],
         tips: [
@@ -284,6 +388,30 @@ export const countryDetails: Record<string, CountryDetail> = {
             gradient: "from-green-700 to-emerald-950",
             highlights: ["트리베르크 폭포", "뻐꾸기시계 공방", "바덴바덴 온천", "흑림 케이크", "티티제 호수"],
           },
+          {
+            name: "콘스탄츠",
+            nameEn: "Konstanz",
+            description:
+              "보덴제(콘스탄스 호수) 호반의 대학도시. 스위스 국경에 접해 있으며, 꽃의 섬 마이나우와 중세 구시가지, 호수 페리가 매력적입니다.",
+            gradient: "from-cyan-400 to-blue-600",
+            highlights: ["마이나우 꽃의 섬", "콘스탄츠 대성당", "호수 유람선", "임페리아 동상"],
+          },
+          {
+            name: "튀빙엔",
+            nameEn: "Tübingen",
+            description:
+              "네카어강 위의 로맨틱한 대학도시. 독일에서 가장 아름다운 구시가지 중 하나로, 색색의 반목조 건물과 슈토허칸(Stocherkahn) 뱃놀이가 유명합니다.",
+            gradient: "from-rose-400 to-pink-600",
+            highlights: ["슈토허칸 뱃놀이", "호엔튀빙엔 성", "마르크트 광장", "횔더린 탑"],
+          },
+          {
+            name: "바덴바덴",
+            nameEn: "Baden-Baden",
+            description:
+              "유럽 최고의 온천 도시. 로마 시대부터 이어진 온천 문화, 화려한 카지노, 페스트슈필하우스 오페라극장이 있는 고급 휴양지입니다.",
+            gradient: "from-emerald-400 to-teal-600",
+            highlights: ["카라칼라 온천", "프리드리히스바드", "쿠어하우스 카지노", "리히텐탈러 알레 산책로"],
+          },
         ],
         tips: [
           "하이델베르크는 프랑크푸르트 공항에서 기차로 1시간. 입국 첫날 코스로 완벽합니다.",
@@ -323,6 +451,30 @@ export const countryDetails: Record<string, CountryDetail> = {
               "괴테와 실러의 도시이자 바우하우스의 탄생지. 작지만 독일 문화사에서 가장 중요한 도시 중 하나로, 클래식과 모더니즘이 공존합니다.",
             gradient: "from-emerald-500 to-green-800",
             highlights: ["괴테 하우스", "바우하우스 박물관", "안나 아말리아 도서관", "부헨발트 기념관"],
+          },
+          {
+            name: "카셀",
+            nameEn: "Kassel",
+            description:
+              "5년마다 열리는 세계 최대 현대미술 전시 도쿠멘타의 도시. 산 위의 거대한 헤라클레스 동상과 물줄기가 흘러내리는 빌헬름스회에 궁원은 UNESCO 세계유산입니다.",
+            gradient: "from-violet-500 to-purple-700",
+            highlights: ["빌헬름스회에 공원(헤라클레스)", "도쿠멘타 전시장", "그림 형제 박물관", "카를스아우에 공원"],
+          },
+          {
+            name: "마르부르크",
+            nameEn: "Marburg",
+            description:
+              "언덕 위의 성과 좁은 골목이 동화 같은 대학도시. 그림 형제가 대학 시절을 보낸 곳으로, 독일 최초의 개신교 대학이 있습니다.",
+            gradient: "from-pink-500 to-rose-700",
+            highlights: ["마르부르크 성", "성 엘리자베트 교회", "구시가지 계단길", "그림 형제 산책로"],
+          },
+          {
+            name: "비스바덴",
+            nameEn: "Wiesbaden",
+            description:
+              "헤센주의 주도이자 온천 도시. 26개의 온천과 화려한 쿠어하우스, 러시아 정교회, 네로베르크 언덕 전망이 매력적인 우아한 도시입니다.",
+            gradient: "from-orange-400 to-amber-600",
+            highlights: ["쿠어하우스 & 카지노", "네로베르크 산악열차", "카이저 프리드리히 온천", "마르크트 교회"],
           },
         ],
         tips: [
@@ -540,6 +692,32 @@ export const countryDetails: Record<string, CountryDetail> = {
             "일본 정원",
           ],
         },
+        {
+          name: "칸",
+          nameEn: "Cannes",
+          description:
+            "매년 5월 열리는 칸 영화제로 세계적으로 유명한 해안 도시입니다. 크루아제트 대로를 따라 고급 호텔과 명품 부티크가 늘어서 있으며, 레랭 제도의 아름다운 자연도 당일치기로 즐길 수 있습니다.",
+          gradient: "from-amber-400 to-orange-600",
+          highlights: [
+            "크루아제트 대로",
+            "칸 영화제 팔레",
+            "레랭 제도 보트 투어",
+            "르 쉬케 구시가지",
+          ],
+        },
+        {
+          name: "아를",
+          nameEn: "Arles",
+          description:
+            "반 고흐가 귀를 자른 도시로 유명하며, 로마 시대 원형경기장이 잘 보존된 프로방스의 보석입니다. 고흐가 그림을 그렸던 장소들을 따라 걷는 고흐 트레일과 매년 열리는 아를 사진 축제가 인기입니다.",
+          gradient: "from-yellow-500 to-amber-700",
+          highlights: [
+            "아를 원형경기장",
+            "반 고흐 재단",
+            "고흐 트레일(밤의 카페 광장)",
+            "아를 사진 축제",
+          ],
+        },
       ],
       tips: [
         "6월 중순~7월 말이 라벤더 시즌으로, 발랑솔 고원과 세낭크 수도원 일대가 보라색 물결로 장관을 이룹니다.",
@@ -689,6 +867,32 @@ export const countryDetails: Record<string, CountryDetail> = {
             "노르망디 다리 전망",
           ],
         },
+        {
+          name: "렌",
+          nameEn: "Rennes",
+          description:
+            "브르타뉴 지방의 수도로, 중세 목조 건물과 현대적인 대학 문화가 어우러진 활기찬 도시입니다. 매주 토요일 열리는 리스 광장 시장은 프랑스에서 가장 큰 재래시장 중 하나이며, 브르타뉴 의회 건물과 화려한 공원이 매력적입니다.",
+          gradient: "from-green-500 to-emerald-700",
+          highlights: [
+            "리스 광장 토요시장",
+            "브르타뉴 의회 건물",
+            "타보르 공원",
+            "생탄 광장 목조 건물",
+          ],
+        },
+        {
+          name: "카앙",
+          nameEn: "Caen",
+          description:
+            "D-Day 상륙작전의 역사를 간직한 노르망디의 도시입니다. 카앙 메모리얼(평화기념관)은 2차 대전의 역사를 깊이 있게 전시하며, 윌리엄 정복왕이 건설한 두 개의 수도원과 성이 주요 볼거리입니다.",
+          gradient: "from-slate-500 to-zinc-700",
+          highlights: [
+            "카앙 메모리얼 (D-Day 박물관)",
+            "오마하 비치 방문",
+            "남성 수도원 & 여성 수도원",
+            "카앙 성",
+          ],
+        },
       ],
       tips: [
         "몽생미셸은 조수 시간표를 미리 확인하고 방문하면 밀물과 썰물의 극적인 변화를 감상할 수 있으며, 일출이나 일몰 시간대가 가장 아름답습니다.",
@@ -759,6 +963,32 @@ export const countryDetails: Record<string, CountryDetail> = {
             "빛의 축제 (12월)",
           ],
         },
+        {
+          name: "안시",
+          nameEn: "Annecy",
+          description:
+            "알프스 산기슭의 안시 호수에 자리한 '알프스의 베네치아'. 수정처럼 맑은 호수와 파스텔 색 구시가지, 운하 위의 팔레 드 릴(섬의 궁전)이 동화 같은 풍경을 만들어냅니다. 여름에는 호수에서 수영과 패러글라이딩을, 겨울에는 인근 스키 리조트를 즐길 수 있습니다.",
+          gradient: "from-cyan-400 to-blue-600",
+          highlights: [
+            "안시 호수 & 유람선",
+            "팔레 드 릴(섬의 궁전)",
+            "구시가지 운하 산책",
+            "세메노즈 산 패러글라이딩",
+          ],
+        },
+        {
+          name: "랭스",
+          nameEn: "Reims",
+          description:
+            "프랑스 왕들의 대관식이 거행된 랭스 대성당이 있는 샹파뉴 지방의 중심 도시입니다. 세계적인 샴페인 하우스(뵈브 클리코, 떼땅저, 모엣 등)의 지하 셀러 투어가 필수 체험이며, 대성당의 '미소 짓는 천사' 조각상이 상징적입니다.",
+          gradient: "from-amber-300 to-yellow-600",
+          highlights: [
+            "랭스 대성당(미소 짓는 천사)",
+            "샴페인 하우스 셀러 투어",
+            "토 궁전 박물관",
+            "생레미 바실리카",
+          ],
+        },
       ],
       tips: [
         "스트라스부르와 콜마르의 크리스마스 마켓은 11월 말~12월 말에 열리며, 유럽 최고의 크리스마스 마켓으로 꼽히니 이 시기 방문을 추천합니다.",
@@ -826,6 +1056,32 @@ export const countryDetails: Record<string, CountryDetail> = {
             "성모 바위 전망대",
             "바스크 미식 체험",
             "바이욘 초콜릿 투어",
+          ],
+        },
+        {
+          name: "루르드",
+          nameEn: "Lourdes",
+          description:
+            "세계 최대의 가톨릭 순례지 중 하나로, 1858년 성모 마리아 발현 이후 매년 수백만 명의 순례자가 방문합니다. 순례 성지의 장엄한 바실리카와 그로트(동굴), 피레네 산맥의 장관이 어우러진 영적 도시입니다.",
+          gradient: "from-sky-400 to-indigo-600",
+          highlights: [
+            "성모 발현 그로트",
+            "무염시태 대성당",
+            "촛불 행렬(매일 저녁)",
+            "픽 뒤 제르 케이블카",
+          ],
+        },
+        {
+          name: "포",
+          nameEn: "Pau",
+          description:
+            "피레네 산맥의 관문 도시이자 앙리 4세의 출생지. 피레네 대로(Boulevard des Pyrénées)에서 바라보는 피레네 산맥의 파노라마가 압도적이며, 19세기 영국 귀족들이 사랑한 우아한 온천 휴양지입니다.",
+          gradient: "from-green-500 to-emerald-700",
+          highlights: [
+            "피레네 대로 파노라마 전망",
+            "포 성(앙리 4세 출생지)",
+            "보몽 공원",
+            "포 푸니쿨라",
           ],
         },
       ],
@@ -1548,6 +1804,19 @@ export const countryDetails: Record<string, CountryDetail> = {
             "12월 촛불 축제",
           ],
         },
+        {
+          name: "데벤터",
+          nameEn: "Deventer",
+          description:
+            "에이설강 변의 한자동맹 도시로, 네덜란드에서 가장 아름다운 중세 건물이 밀집한 구시가지를 가지고 있습니다. 매년 12월 열리는 디킨스 축제(찰스 디킨스 빅토리아 시대 재현)가 특히 유명하며, 전통 쿠크(향신료 케이크)의 본고장입니다.",
+          gradient: "from-stone-400 to-amber-600",
+          highlights: [
+            "디킨스 축제(12월)",
+            "중세 구시가지 브링크 광장",
+            "데벤터 쿠크(향신료 케이크)",
+            "에이설강 산책",
+          ],
+        },
       ],
       tips: [
         "위트레흐트는 암스테르담에서 기차로 30분이면 도착하므로 당일치기 여행이 가능합니다.",
@@ -1658,6 +1927,32 @@ export const countryDetails: Record<string, CountryDetail> = {
             "히에로니무스 보스 아트센터",
             "구시가지 마르크트 광장",
             "보스체 볼(초콜릿 페이스트리)",
+          ],
+        },
+        {
+          name: "브레다",
+          nameEn: "Breda",
+          description:
+            "네덜란드 남부 북브라반트 주의 활기찬 도시로, 그로테 마르크트 광장의 대교회와 카페 테라스가 매력적입니다. 나사우 왕가의 역사적 뿌리가 있는 도시로 브레다 성과 벡스파크 공원이 도시의 녹색 보석입니다.",
+          gradient: "from-green-500 to-teal-700",
+          highlights: [
+            "그로테 교회(오나제리베브라우웬케르크)",
+            "브레다 성",
+            "벡스파크 공원",
+            "그로테 마르크트 카페",
+          ],
+        },
+        {
+          name: "틸뷔르흐",
+          nameEn: "Tilburg",
+          description:
+            "북브라반트의 대학도시이자 네덜란드 최대의 야외 놀이공원 에프텔링이 있는 곳입니다. 에프텔링은 유럽에서 가장 아름다운 테마파크 중 하나로, 동화와 판타지를 테마로 한 매력적인 어트랙션이 가족 여행객에게 인기입니다.",
+          gradient: "from-purple-400 to-violet-600",
+          highlights: [
+            "에프텔링 테마파크",
+            "텍스타일 뮤지엄",
+            "드포인트 커피하우스",
+            "도심 쇼핑 거리",
           ],
         },
       ],
@@ -1809,6 +2104,32 @@ export const countryDetails: Record<string, CountryDetail> = {
             "스텔라 아르투아 양조장",
           ],
         },
+        {
+          name: "메헬렌",
+          nameEn: "Mechelen",
+          description:
+            "브뤼셀과 안트베르펜 사이에 위치한 숨겨진 보석 같은 도시로, 중세와 르네상스 건축이 잘 보존되어 있습니다. 성 롬바우츠 대성당의 종탑에서 벨기에 전경을 감상할 수 있으며, 카를 5세가 자란 도시로 왕실의 역사가 깃들어 있습니다. 수제 맥주 양조장 '헷 앙커'와 아기자기한 거리가 매력적입니다.",
+          gradient: "from-teal-500 to-green-700",
+          highlights: [
+            "성 롬바우츠 종탑",
+            "헷 앙커 양조장",
+            "그로테 마르크트",
+            "카즈마텐(수도원 맥주 카페)",
+          ],
+        },
+        {
+          name: "이프르",
+          nameEn: "Ypres",
+          description:
+            "제1차 세계대전 서부전선의 가장 치열한 전장이었던 역사적 도시입니다. 매일 저녁 8시 메닌 게이트에서 열리는 라스트 포스트(추모 나팔) 의식은 100년 넘게 이어지고 있으며, 인 플란더스 필즈 박물관은 전쟁의 참상을 생생하게 전합니다. 전후 완벽하게 복원된 직물회관 건물도 인상적입니다.",
+          gradient: "from-gray-500 to-slate-700",
+          highlights: [
+            "메닌 게이트 라스트 포스트",
+            "인 플란더스 필즈 박물관",
+            "직물회관",
+            "타인 코트 묘지",
+          ],
+        },
       ],
       tips: [
         "브뤼헤와 겐트는 브뤼셀에서 기차로 1시간 이내로, 당일치기 여행이 가능합니다.",
@@ -1877,6 +2198,19 @@ export const countryDetails: Record<string, CountryDetail> = {
             "종탑(벨프루아)",
             "뒤카스 축제",
             "반 고흐의 집",
+          ],
+        },
+        {
+          name: "투르네",
+          nameEn: "Tournai",
+          description:
+            "벨기에에서 가장 오래된 도시 중 하나로, 5개의 종탑을 가진 노트르담 대성당(UNESCO)이 대표 랜드마크입니다. 로마 시대부터의 긴 역사를 가지고 있으며, 프랑스 국경 근처에 위치해 프랑스 문화의 영향이 강한 매력적인 도시입니다.",
+          gradient: "from-amber-500 to-orange-700",
+          highlights: [
+            "노트르담 대성당(5개 종탑)",
+            "벨프루아 종탑",
+            "그랑플라스",
+            "미술관(반 데르 베이든 작품)",
           ],
         },
       ],
@@ -2267,4 +2601,85 @@ export const countryDetails: Record<string, CountryDetail> = {
     "북아일랜드와 아일랜드 공화국 간 국경은 자유롭게 이동 가능하지만, 통화가 유로에서 파운드로 바뀌니 유의하세요.",
   ],
 },
+  luxembourg: {
+    heroGradient: "from-sky-400 via-white to-red-500",
+    intro: "유럽의 심장부에 위치한 소국 룩셈부르크는 중세 요새 도시와 현대 금융 중심지가 공존하는 독특한 나라입니다. 아름다운 계곡 위에 세워진 구시가지는 UNESCO 세계유산이며, 작지만 미슐랭 레스토랑 밀도가 유럽 최고 수준입니다.",
+    capital: "룩셈부르크시 (Luxembourg City)",
+    currency: "유로 (EUR, €)",
+    timezone: "한국보다 8시간 느림",
+    bestSeason: "5월~9월",
+    flightTime: "직항 없음 (경유 약 13~15시간)",
+    visa: "90일 이내 무비자 (셍겐 조약)",
+    recommendedDays: "2~4일",
+    dailyBudget: "약 15~25만원",
+    regions: [
+      {
+        slug: "luxembourg-city",
+        name: "룩셈부르크시",
+        nameEn: "Luxembourg City",
+        icon: "🏰",
+        gradient: "from-sky-500 to-blue-800",
+        description: "페트뤼스 계곡 위에 세워진 UNESCO 세계유산 요새 도시. 유럽연합 기관과 중세 성벽, 현대 건축이 조화를 이루는 수도입니다.",
+        cities: [
+          {
+            name: "룩셈부르크시",
+            nameEn: "Luxembourg City",
+            description: "계곡 위의 요새 도시로 구시가지(UNESCO)와 현대적인 키르히베르크 지구가 대조적인 매력의 수도.",
+            gradient: "from-sky-500 to-blue-800",
+            highlights: ["보크 포대", "그룬드 지구", "아돌프 다리", "노트르담 대성당", "기욤 광장"],
+          },
+        ],
+        tips: [
+          "룩셈부르크는 2020년부터 전국 대중교통이 무료입니다!",
+          "보크 포대(Bock Casemates)는 17km에 달하는 지하 요새 터널입니다.",
+        ],
+      },
+      {
+        slug: "countryside",
+        name: "교외 & 자연",
+        nameEn: "Countryside & Nature",
+        icon: "🌿",
+        gradient: "from-green-500 to-emerald-800",
+        description: "뮐러탈의 '작은 스위스', 모젤 와인 지역, 중세 고성이 어우러진 룩셈부르크 교외.",
+        cities: [
+          {
+            name: "비안덴",
+            nameEn: "Vianden",
+            description: "우르 강변의 중세 성이 있는 아름다운 소도시. 빅토르 위고가 사랑한 마을.",
+            gradient: "from-amber-500 to-orange-700",
+            highlights: ["비안덴 성", "체어리프트", "빅토르 위고 박물관", "우르 강 산책"],
+          },
+          {
+            name: "에히터나흐",
+            nameEn: "Echternach",
+            description: "룩셈부르크 최고의 도시이자 뮐러탈 '작은 스위스' 하이킹의 거점.",
+            gradient: "from-green-400 to-teal-700",
+            highlights: ["뮐러탈 트레일", "성 빌리브로르드 수도원", "시장 광장"],
+          },
+          {
+            name: "모젤 와인 지역",
+            nameEn: "Moselle Valley",
+            description: "독일 국경을 따라 이어지는 포도밭과 와이너리, 아름다운 강변 마을들.",
+            gradient: "from-yellow-400 to-amber-600",
+            highlights: ["레밀히 와이너리", "겐겐 마을", "모젤 와인 축제"],
+          },
+        ],
+        tips: [
+          "뮐러탈은 잘 정비된 하이킹 코스가 많아 자연을 즐기기 좋습니다.",
+          "비안덴은 룩셈부르크시에서 버스로 약 1.5시간, 당일치기 완벽합니다.",
+        ],
+      },
+    ],
+    foods: [
+      { name: "주드 맛 가르데분넨", emoji: "🥓", description: "훈제 돼지목살과 강낭콩 스튜, 룩셈부르크 국민 요리." },
+      { name: "그롬페레키슐러", emoji: "🥔", description: "감자 팬케이크, 사과소스와 함께 먹는 전통 간식." },
+      { name: "모젤 와인", emoji: "🍷", description: "모젤강변에서 생산되는 리슬링 화이트 와인." },
+    ],
+    tips: [
+      "전국 대중교통(버스, 기차, 트램)이 완전 무료입니다.",
+      "독일어, 프랑스어, 룩셈부르크어 3개 공용어가 있으며, 영어도 잘 통합니다.",
+      "작은 나라라 2~3일이면 주요 명소를 충분히 둘러볼 수 있습니다.",
+      "브뤼셀, 트리어, 메츠 등 인접 도시와 결합한 여행이 효율적입니다.",
+    ],
+  },
 };
