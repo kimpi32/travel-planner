@@ -3,7 +3,6 @@
 import { use } from "react";
 import { Loader2, AlertCircle } from "lucide-react";
 import { PostDetail } from "@/components/community/PostDetail";
-import { QueryProvider } from "@/components/providers/QueryProvider";
 import { usePost } from "@/hooks/use-posts";
 
 function PostDetailContent({ postId }: { postId: string }) {
@@ -37,10 +36,8 @@ export default function PostPage({
   const { postId } = use(params);
 
   return (
-    <QueryProvider>
-      <div className="max-w-2xl mx-auto px-4 py-8">
-        <PostDetailContent postId={postId} />
-      </div>
-    </QueryProvider>
+    <div className="max-w-2xl mx-auto px-4 py-8">
+      <PostDetailContent postId={postId} />
+    </div>
   );
 }

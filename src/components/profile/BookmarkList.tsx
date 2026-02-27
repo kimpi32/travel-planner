@@ -10,13 +10,19 @@ import { cn } from "@/lib/utils";
 const TYPE_ICON: Record<Post["type"], React.ComponentType<{ className?: string }>> = {
   review: Bookmark,
   tip: Lightbulb,
-  qna: MessageCircle,
+  itinerary: FileText,
+  question: MessageCircle,
+  buddy: MessageCircle,
+  general: FileText,
 };
 
 const TYPE_LABEL: Record<Post["type"], string> = {
   review: "후기",
   tip: "팁",
-  qna: "Q&A",
+  itinerary: "여행 일정",
+  question: "Q&A",
+  buddy: "동행 구함",
+  general: "일반",
 };
 
 function BookmarkItem({ postId, post }: { postId: string; post: Post }) {

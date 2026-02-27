@@ -5,10 +5,9 @@ import Link from "next/link";
 import { PenSquare } from "lucide-react";
 import { PostTypeFilter } from "@/components/community/PostTypeFilter";
 import { PostList } from "@/components/community/PostList";
-import { QueryProvider } from "@/components/providers/QueryProvider";
 import type { PostType } from "@/types/community";
 
-function CommunityPageContent() {
+export default function CommunityPage() {
   const [postType, setPostType] = useState<PostType>("all");
 
   return (
@@ -34,13 +33,5 @@ function CommunityPageContent() {
         글쓰기
       </Link>
     </div>
-  );
-}
-
-export default function CommunityPage() {
-  return (
-    <QueryProvider>
-      <CommunityPageContent />
-    </QueryProvider>
   );
 }

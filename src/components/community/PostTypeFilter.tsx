@@ -8,7 +8,10 @@ const TABS: { value: PostType; label: string }[] = [
   { value: "all", label: "전체" },
   { value: "review", label: "후기" },
   { value: "tip", label: "팁" },
-  { value: "qna", label: "Q&A" },
+  { value: "itinerary", label: "여행 일정" },
+  { value: "question", label: "Q&A" },
+  { value: "buddy", label: "동행 구함" },
+  { value: "general", label: "일반" },
 ];
 
 interface PostTypeFilterProps {

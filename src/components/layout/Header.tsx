@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import SearchBar from "@/components/search/SearchBar";
 import { MobileNav } from "@/components/layout/MobileNav";
+import { NotificationBell } from "@/components/layout/NotificationBell";
 import { cn } from "@/lib/utils";
 
 const navLinks = [
@@ -57,6 +58,7 @@ export function Header() {
         {/* 우측 액션 */}
         <div className="ml-auto flex items-center gap-2 md:ml-0">
           <ThemeToggle />
+          <NotificationBell />
           <Button variant="outline" size="sm" className="hidden md:flex">
             로그인
           </Button>

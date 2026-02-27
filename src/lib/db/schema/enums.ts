@@ -14,6 +14,7 @@ export const postTypeEnum = pgEnum("post_type", [
   "itinerary",
   "question",
   "general",
+  "buddy",
 ]);
 
 export const budgetCategoryEnum = pgEnum("budget_category", [
@@ -32,6 +33,13 @@ export const bookmarkTargetEnum = pgEnum("bookmark_target", [
 ]);
 
 export const likeTargetEnum = pgEnum("like_target", ["post", "comment"]);
+
+export const notificationTypeEnum = pgEnum("notification_type", [
+  "like",
+  "comment",
+  "follow",
+  "mention",
+]);
 
 export const tripItemCategoryEnum = pgEnum("trip_item_category", [
   "accommodation",

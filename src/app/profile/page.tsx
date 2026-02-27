@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import { Loader2 } from "lucide-react";
 import { ProfileHeader } from "@/components/profile/ProfileHeader";
 import { ProfileTabs } from "@/components/profile/ProfileTabs";
-import { QueryProvider } from "@/components/providers/QueryProvider";
 import { useAuth } from "@/hooks/use-auth";
 import { useProfile } from "@/hooks/use-profile";
 
@@ -40,10 +39,8 @@ function OwnProfileContent() {
 
 export default function ProfilePage() {
   return (
-    <QueryProvider>
-      <div className="max-w-3xl mx-auto px-4 py-8">
-        <OwnProfileContent />
-      </div>
-    </QueryProvider>
+    <div className="max-w-3xl mx-auto px-4 py-8">
+      <OwnProfileContent />
+    </div>
   );
 }

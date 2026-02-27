@@ -4,7 +4,6 @@ import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Loader2 } from "lucide-react";
 import { PostCreateForm } from "@/components/community/PostCreateForm";
-import { QueryProvider } from "@/components/providers/QueryProvider";
 import { useAuth } from "@/hooks/use-auth";
 
 function WritePageContent() {
@@ -32,16 +31,14 @@ function WritePageContent() {
 
 export default function WritePage() {
   return (
-    <QueryProvider>
-      <div className="max-w-2xl mx-auto px-4 py-8">
-        <div className="mb-6">
-          <h1 className="text-2xl font-bold">게시글 작성</h1>
-          <p className="text-muted-foreground text-sm mt-1">
-            여행 이야기를 커뮤니티와 나눠보세요
-          </p>
-        </div>
-        <WritePageContent />
+    <div className="max-w-2xl mx-auto px-4 py-8">
+      <div className="mb-6">
+        <h1 className="text-2xl font-bold">게시글 작성</h1>
+        <p className="text-muted-foreground text-sm mt-1">
+          여행 이야기를 커뮤니티와 나눠보세요
+        </p>
       </div>
-    </QueryProvider>
+      <WritePageContent />
+    </div>
   );
 }

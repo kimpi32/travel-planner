@@ -1,4 +1,38 @@
-export type PostType = "all" | "review" | "tip" | "qna";
+export type PostType = "all" | "review" | "tip" | "itinerary" | "question" | "general" | "buddy";
+
+export type TravelStyle = "budget" | "balanced" | "comfort" | "luxury";
+export type GenderPreference = "any" | "same";
+
+export interface BuddyMeta {
+  startDate: string;       // "YYYY-MM-DD"
+  endDate: string;         // "YYYY-MM-DD"
+  headcount: number;       // 모집 인원 수
+  travelStyle: TravelStyle;
+  genderPreference: GenderPreference;
+  contact: string;         // 연락 방법 (카카오ID, 오픈채팅 링크 등)
+}
+
+export interface ItineraryDay {
+  dayNumber: number;
+  date: string;
+  title?: string;
+  activities: {
+    time: string;
+    title: string;
+    place?: string;
+    category: string;
+    estimatedCost: number;
+    notes?: string;
+  }[];
+}
+
+export interface ItineraryMeta {
+  startDate: string;
+  endDate: string;
+  travelers: number;
+  days: ItineraryDay[];
+  totalBudget?: number;
+}
 
 export interface Author {
   id: string;

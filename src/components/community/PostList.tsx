@@ -10,6 +10,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { PostCard } from "./PostCard";
+import { BuddyCard } from "./BuddyCard";
 import { usePostList } from "@/hooks/use-posts";
 import type { PostType } from "@/types/community";
 
@@ -85,9 +86,13 @@ export function PostList({ type, userId, destination }: PostListProps) {
       ) : (
         <>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {posts.map((post) => (
-              <PostCard key={post.id} post={post} />
-            ))}
+            {posts.map((post) =>
+              post.type === "buddy" ? (
+                <BuddyCard key={post.id} post={post} />
+              ) : (
+                <PostCard key={post.id} post={post} />
+              )
+            )}
           </div>
 
           <div ref={loadMoreRef} className="flex justify-center py-4">

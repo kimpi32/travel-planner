@@ -4,7 +4,6 @@ import { use } from "react";
 import { Loader2, AlertCircle } from "lucide-react";
 import { ProfileHeader } from "@/components/profile/ProfileHeader";
 import { ProfileTabs } from "@/components/profile/ProfileTabs";
-import { QueryProvider } from "@/components/providers/QueryProvider";
 import { useProfile } from "@/hooks/use-profile";
 import { useAuth } from "@/hooks/use-auth";
 
@@ -46,10 +45,8 @@ export default function UserProfilePage({
   const { userId } = use(params);
 
   return (
-    <QueryProvider>
-      <div className="max-w-3xl mx-auto px-4 py-8">
-        <UserProfileContent userId={userId} />
-      </div>
-    </QueryProvider>
+    <div className="max-w-3xl mx-auto px-4 py-8">
+      <UserProfileContent userId={userId} />
+    </div>
   );
 }

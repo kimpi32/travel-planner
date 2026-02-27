@@ -11,14 +11,31 @@ import type { Post } from "@/types/community";
 const TYPE_LABEL: Record<Post["type"], string> = {
   review: "후기",
   tip: "팁",
-  qna: "Q&A",
+  itinerary: "여행 일정",
+  question: "Q&A",
+  buddy: "동행 구함",
+  general: "일반",
 };
 
 const TYPE_COLOR: Record<Post["type"], string> = {
   review: "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400",
   tip: "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400",
-  qna: "bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400",
+  itinerary: "bg-violet-100 text-violet-700 dark:bg-violet-900/30 dark:text-violet-400",
+  question: "bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400",
+  buddy: "bg-rose-100 text-rose-700 dark:bg-rose-900/30 dark:text-rose-400",
+  general: "bg-slate-100 text-slate-700 dark:bg-slate-800/50 dark:text-slate-400",
 };
+
+function getBodyPreview(body: string): string {
+  try {
+    const parsed = JSON.parse(body);
+    if (parsed.__buddy__ && parsed.text) return parsed.text;
+    if (parsed.__itinerary__) return parsed.summary ?? "일정 공유 게시글입니다.";
+  } catch {
+    // plain text
+  }
+  return body;
+}
 
 function formatDate(dateStr: string) {
   const date = new Date(dateStr);
@@ -82,7 +99,7 @@ export function PostCard({ post, className }: PostCardProps) {
           </h3>
 
           <p className="text-muted-foreground text-xs line-clamp-2 leading-relaxed">
-            {post.body}
+            {getBodyPreview(post.body)}
           </p>
 
           {post.destination && (

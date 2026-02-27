@@ -3,7 +3,7 @@ import { users } from "./users";
 import { trips, tripDays, tripItems, budgetItems } from "./trips";
 import { posts } from "./posts";
 import { comments } from "./comments";
-import { bookmarks, collections, likes } from "./social";
+import { bookmarks, collections, likes, follows, notifications, userBadges, reports } from "./social";
 
 // Users relations
 export const usersRelations = relations(users, ({ many }) => ({
@@ -13,6 +13,12 @@ export const usersRelations = relations(users, ({ many }) => ({
   bookmarks: many(bookmarks),
   collections: many(collections),
   likes: many(likes),
+  followers: many(follows, { relationName: "userFollowers" }),
+  following: many(follows, { relationName: "userFollowing" }),
+  notifications: many(notifications, { relationName: "userNotifications" }),
+  actedNotifications: many(notifications, { relationName: "actorNotifications" }),
+  badges: many(userBadges),
+  reports: many(reports, { relationName: "userReports" }),
 }));
 
 // Trips relations
@@ -105,5 +111,58 @@ export const likesRelations = relations(likes, ({ one }) => ({
   user: one(users, {
     fields: [likes.userId],
     references: [users.id],
+  }),
+}));
+
+// Follows relations
+export const followsRelations = relations(follows, ({ one }) => ({
+  follower: one(users, {
+    fields: [follows.followerId],
+    references: [users.id],
+    relationName: "userFollowing",
+  }),
+  following: one(users, {
+    fields: [follows.followingId],
+    references: [users.id],
+    relationName: "userFollowers",
+  }),
+}));
+
+// Notifications relations
+export const notificationsRelations = relations(notifications, ({ one }) => ({
+  user: one(users, {
+    fields: [notifications.userId],
+    references: [users.id],
+    relationName: "userNotifications",
+  }),
+  actor: one(users, {
+    fields: [notifications.actorId],
+    references: [users.id],
+    relationName: "actorNotifications",
+  }),
+  post: one(posts, {
+    fields: [notifications.postId],
+    references: [posts.id],
+  }),
+  comment: one(comments, {
+    fields: [notifications.commentId],
+    references: [comments.id],
+  }),
+}));
+
+// UserBadges relations
+export const userBadgesRelations = relations(userBadges, ({ one }) => ({
+  user: one(users, {
+    fields: [userBadges.userId],
+    references: [users.id],
+  }),
+}));
+
+// Reports relations
+export const reportsRelations = relations(reports, ({ one }) => ({
+  reporter: one(users, {
+    fields: [reports.reporterId],
+    references: [users.id],
+    relationName: "userReports",
   }),
 }));

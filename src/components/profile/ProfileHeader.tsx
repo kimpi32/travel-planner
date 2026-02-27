@@ -1,19 +1,49 @@
 "use client";
 
-import { useState } from "react";
-import { Pencil, Globe, MapPin } from "lucide-react";
+import { useState, useEffect } from "react";
+import { Pencil, Globe, MapPin, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ProfileEdit } from "./ProfileEdit";
+import { BadgeGrid, type UserBadgeData } from "./BadgeGrid";
+import { FollowButton } from "@/components/community/FollowButton";
 import type { UserProfile } from "@/types/community";
 import { cn } from "@/lib/utils";
 
 interface ProfileHeaderProps {
   profile: UserProfile;
   isOwn?: boolean;
+  followerCount?: number;
+  followingCount?: number;
 }
 
-export function ProfileHeader({ profile, isOwn }: ProfileHeaderProps) {
+export function ProfileHeader({
+  profile,
+  isOwn,
+  followerCount = 0,
+  followingCount = 0,
+}: ProfileHeaderProps) {
   const [editOpen, setEditOpen] = useState(false);
+  const [badges, setBadges] = useState<UserBadgeData[]>([]);
+  const [badgesLoading, setBadgesLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchBadges() {
+      try {
+        const res = await fetch(`/api/community/badges?userId=${profile.id}`);
+        if (res.ok) {
+          const json = await res.json();
+          setBadges(json.data?.badges ?? []);
+        }
+      } catch {
+        // 배지 로딩 실패는 무시 (비필수 기능)
+      } finally {
+        setBadgesLoading(false);
+      }
+    }
+    fetchBadges();
+  }, [profile.id]);
+
+  const earnedBadges = badges.filter((b) => b.earned);
 
   return (
     <>
@@ -37,7 +67,7 @@ export function ProfileHeader({ profile, isOwn }: ProfileHeaderProps) {
                 </p>
               )}
             </div>
-            {isOwn && (
+            {isOwn ? (
               <Button
                 variant="outline"
                 size="sm"
@@ -47,6 +77,8 @@ export function ProfileHeader({ profile, isOwn }: ProfileHeaderProps) {
                 <Pencil className="h-3.5 w-3.5 mr-1.5" />
                 편집
               </Button>
+            ) : (
+              <FollowButton targetUserId={profile.id} size="sm" className="shrink-0" />
             )}
           </div>
 
@@ -65,7 +97,36 @@ export function ProfileHeader({ profile, isOwn }: ProfileHeaderProps) {
               <span className="font-semibold">{profile.postCount}</span>
               <span className="text-muted-foreground ml-1.5">게시글</span>
             </div>
+            <div className="flex items-center gap-1.5 text-sm">
+              <Users className="h-4 w-4 text-muted-foreground" />
+              <span className="font-semibold">{followerCount}</span>
+              <span className="text-muted-foreground">팔로워</span>
+            </div>
+            <div className="text-sm">
+              <span className="font-semibold">{followingCount}</span>
+              <span className="text-muted-foreground ml-1.5">팔로잉</span>
+            </div>
           </div>
+
+          {/* 획득한 배지 미리보기 */}
+          {!badgesLoading && earnedBadges.length > 0 && (
+            <div className="mt-4 pt-4 border-t">
+              <p className="text-xs font-medium text-muted-foreground mb-2">
+                획득한 배지
+              </p>
+              <div className="flex flex-wrap gap-1.5">
+                {earnedBadges.map((badge) => (
+                  <span
+                    key={badge.id}
+                    title={`${badge.name}: ${badge.description}`}
+                    className="text-xl leading-none cursor-default"
+                  >
+                    {badge.emoji}
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       </div>
 

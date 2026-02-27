@@ -23,6 +23,7 @@ import {
 import { DragDropContainer } from "@/components/planner/DragDropContainer";
 import { BudgetTracker } from "@/components/planner/BudgetTracker";
 import { PlannerMap } from "@/components/planner/PlannerMap";
+import { ShareItineraryButton } from "@/components/community/ShareItineraryButton";
 import { usePlannerStore } from "@/hooks/use-planner-store";
 import { TripStatus } from "@/types/planner";
 
@@ -110,6 +111,8 @@ export default function TripDetailPage({
               <SelectItem value="completed">완료</SelectItem>
             </SelectContent>
           </Select>
+
+          <ShareItineraryButton trip={trip} size="sm" variant="outline" />
 
           <Button variant="ghost" size="icon-sm" title="여행 정보 수정">
             <Pencil className="size-4" />
