@@ -123,6 +123,15 @@ import { uaeCityDetails, uaeAttractionDetails } from "./city-details/uae";
 import { israelCityDetails, israelAttractionDetails } from "./city-details/israel";
 import { jordanCityDetails, jordanAttractionDetails } from "./city-details/jordan";
 import { omanCityDetails, omanAttractionDetails } from "./city-details/oman";
+// Korea (Domestic)
+import { seoulCityDetails, seoulAttractionDetails } from "./city-details/korea-seoul";
+import { busanCityDetails, busanAttractionDetails } from "./city-details/korea-busan";
+import { jejuCityDetails, jejuAttractionDetails } from "./city-details/korea-jeju";
+import { gyeongjuCityDetails, gyeongjuAttractionDetails } from "./city-details/korea-gyeongju";
+import { jeonjuCityDetails, jeonjuAttractionDetails } from "./city-details/korea-jeonju";
+import { gangneungCityDetails, gangneungAttractionDetails } from "./city-details/korea-gangneung";
+import { yeosuCityDetails, yeosuAttractionDetails } from "./city-details/korea-yeosu";
+import { sokhoCityDetails, sokhoAttractionDetails } from "./city-details/korea-sokcho";
 // East Asia
 import { japanCityDetails, japanAttractionDetails } from "./city-details/japan";
 import { chinaCityDetails, chinaAttractionDetails } from "./city-details/china";
@@ -143,6 +152,25 @@ import { sriLankaCityDetails, sriLankaAttractionDetails } from "./city-details/s
 // Central Asia
 import { uzbekistanCityDetails, uzbekistanAttractionDetails } from "./city-details/uzbekistan";
 import { kazakhstanCityDetails, kazakhstanAttractionDetails } from "./city-details/kazakhstan";
+// South America
+import { brazilCityDetails, brazilAttractionDetails } from "./city-details/brazil";
+import { argentinaCityDetails, argentinaAttractionDetails } from "./city-details/argentina";
+import { peruCityDetails, peruAttractionDetails } from "./city-details/peru";
+import { chileCityDetails, chileAttractionDetails } from "./city-details/chile";
+import { colombiaCityDetails, colombiaAttractionDetails } from "./city-details/colombia";
+// North America
+import { usaCityDetails, usaAttractionDetails } from "./city-details/usa";
+import { canadaCityDetails, canadaAttractionDetails } from "./city-details/canada";
+import { mexicoCityDetails, mexicoAttractionDetails } from "./city-details/mexico";
+// Oceania
+import { australiaCityDetails, australiaAttractionDetails } from "./city-details/australia";
+import { newZealandCityDetails, newZealandAttractionDetails } from "./city-details/new-zealand";
+// Africa
+import { moroccoCityDetails, moroccoAttractionDetails } from "./city-details/morocco";
+import { egyptCityDetails, egyptAttractionDetails } from "./city-details/egypt";
+import { southAfricaCityDetails, southAfricaAttractionDetails } from "./city-details/south-africa";
+import { kenyaCityDetails, kenyaAttractionDetails } from "./city-details/kenya";
+import { tanzaniaCityDetails, tanzaniaAttractionDetails } from "./city-details/tanzania";
 
 Object.assign(
   cityDetails,
@@ -152,10 +180,15 @@ Object.assign(
   norwayCityDetails, swedenCityDetails, finlandCityDetails, denmarkCityDetails, icelandCityDetails,
   croatiaCityDetails, sloveniaCityDetails, turkeyCityDetails,
   georgiaCityDetails, uaeCityDetails, israelCityDetails, jordanCityDetails, omanCityDetails,
+  seoulCityDetails, busanCityDetails, jejuCityDetails, gyeongjuCityDetails, jeonjuCityDetails, gangneungCityDetails, yeosuCityDetails, sokhoCityDetails,
   japanCityDetails, chinaCityDetails, taiwanCityDetails, mongoliaCityDetails,
   thailandCityDetails, vietnamCityDetails, indonesiaCityDetails, philippinesCityDetails, malaysiaCityDetails, singaporeCityDetails, cambodiaCityDetails,
   indiaCityDetails, nepalCityDetails, sriLankaCityDetails,
   uzbekistanCityDetails, kazakhstanCityDetails,
+  brazilCityDetails, argentinaCityDetails, peruCityDetails, chileCityDetails, colombiaCityDetails,
+  usaCityDetails, canadaCityDetails, mexicoCityDetails,
+  australiaCityDetails, newZealandCityDetails,
+  moroccoCityDetails, egyptCityDetails, southAfricaCityDetails, kenyaCityDetails, tanzaniaCityDetails,
 );
 Object.assign(
   attractionDetails,
@@ -165,8 +198,13 @@ Object.assign(
   norwayAttractionDetails, swedenAttractionDetails, finlandAttractionDetails, denmarkAttractionDetails, icelandAttractionDetails,
   croatiaAttractionDetails, sloveniaAttractionDetails, turkeyAttractionDetails,
   georgiaAttractionDetails, uaeAttractionDetails, israelAttractionDetails, jordanAttractionDetails, omanAttractionDetails,
+  seoulAttractionDetails, busanAttractionDetails, jejuAttractionDetails, gyeongjuAttractionDetails, jeonjuAttractionDetails, gangneungAttractionDetails, yeosuAttractionDetails, sokhoAttractionDetails,
   japanAttractionDetails, chinaAttractionDetails, taiwanAttractionDetails, mongoliaAttractionDetails,
   thailandAttractionDetails, vietnamAttractionDetails, indonesiaAttractionDetails, philippinesAttractionDetails, malaysiaAttractionDetails, singaporeAttractionDetails, cambodiaAttractionDetails,
   indiaAttractionDetails, nepalAttractionDetails, sriLankaAttractionDetails,
   uzbekistanAttractionDetails, kazakhstanAttractionDetails,
+  brazilAttractionDetails, argentinaAttractionDetails, peruAttractionDetails, chileAttractionDetails, colombiaAttractionDetails,
+  usaAttractionDetails, canadaAttractionDetails, mexicoAttractionDetails,
+  australiaAttractionDetails, newZealandAttractionDetails,
+  moroccoAttractionDetails, egyptAttractionDetails, southAfricaAttractionDetails, kenyaAttractionDetails, tanzaniaAttractionDetails,
 );
