@@ -6,6 +6,8 @@ import { createClient } from "./supabase-server";
 export async function getCurrentUser() {
   const supabase = await createClient();
 
+  if (!supabase) return null;
+
   const {
     data: { user: authUser },
     error,
