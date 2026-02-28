@@ -22,3 +22,6 @@ export type NotificationType = (typeof NOTIFICATION_TYPE)[number];
 
 export const TRIP_ITEM_CATEGORY = ["accommodation", "transportation", "attraction", "restaurant", "activity", "other"] as const;
 export type TripItemCategory = (typeof TRIP_ITEM_CATEGORY)[number];
+
+export const USER_ROLE = ["user", "admin"] as const;
+export type UserRole = (typeof USER_ROLE)[number];

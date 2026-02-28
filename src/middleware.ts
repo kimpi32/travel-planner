@@ -5,11 +5,15 @@ const PROTECTED_PATHS = [
   "/planner",
   "/profile",
   "/community/write",
+  "/admin",
+  "/api/admin",
   "/api/trips",
   "/api/community/posts",
   "/api/community/profiles",
   "/api/community/reports",
 ];
+
+const ADMIN_PATHS = ["/admin", "/api/admin"];
 
 // API 경로 중 GET은 비인증 허용, POST/PUT/PATCH/DELETE만 인증 필요
 const API_GET_ALLOWED = [
@@ -60,6 +64,15 @@ export async function middleware(request: NextRequest) {
     const res = NextResponse.redirect(loginUrl);
     res.cookies.set(COOKIE_NAME, "", { path: "/", maxAge: 0 });
     return res;
+  }
+
+  // 어드민 경로 접근 시 role 체크
+  const isAdminPath = ADMIN_PATHS.some((p) => pathname.startsWith(p));
+  if (isAdminPath && payload.role !== "admin") {
+    if (pathname.startsWith("/api/")) {
+      return NextResponse.json({ error: "관리자 권한이 필요합니다." }, { status: 403 });
+    }
+    return NextResponse.redirect(new URL("/", request.url));
   }
 
   return NextResponse.next();

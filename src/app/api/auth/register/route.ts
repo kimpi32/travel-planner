@@ -49,8 +49,8 @@ export async function POST(request: NextRequest) {
 
     const userId = insertResult[0].id;
 
-    // JWT 발급 + 쿠키 설정
-    const token = await signToken({ userId, email });
+    // JWT 발급 + 쿠키 설정 (신규 가입은 항상 user 역할)
+    const token = await signToken({ userId, email, role: "user" });
 
     const response = NextResponse.json(
       { id: userId, email, name },

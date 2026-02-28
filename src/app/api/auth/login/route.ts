@@ -48,12 +48,13 @@ export async function POST(request: NextRequest) {
     }
 
     // JWT 발급 + 쿠키 설정
-    const token = await signToken({ userId: user.id, email: user.email });
+    const token = await signToken({ userId: user.id, email: user.email, role: user.role });
 
     const response = NextResponse.json({
       id: user.id,
       email: user.email,
       name: user.name,
+      role: user.role,
     });
 
     response.cookies.set(COOKIE_NAME, token, {

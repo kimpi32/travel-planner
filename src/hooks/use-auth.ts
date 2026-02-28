@@ -6,6 +6,7 @@ interface AuthUser {
   id: string;
   email: string;
   name: string;
+  role: string;
   profileImage?: string | null;
   bio?: string | null;
 }
@@ -57,7 +58,7 @@ export function useAuth(): UseAuthReturn {
       }
 
       const data = await res.json();
-      setUser({ id: data.id, email: data.email, name: data.name });
+      setUser({ id: data.id, email: data.email, name: data.name, role: data.role ?? "user" });
       return { error: null };
     } catch {
       return { error: "네트워크 오류가 발생했습니다." };
@@ -78,7 +79,7 @@ export function useAuth(): UseAuthReturn {
       }
 
       const data = await res.json();
-      setUser({ id: data.id, email: data.email, name: data.name });
+      setUser({ id: data.id, email: data.email, name: data.name, role: data.role ?? "user" });
       return { error: null };
     } catch {
       return { error: "네트워크 오류가 발생했습니다." };

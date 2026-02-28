@@ -86,6 +86,15 @@ export default function AuthButton() {
             <p className="truncate text-xs text-muted-foreground">{user.email}</p>
           </div>
           <div className="py-1">
+            {user.role === "admin" && (
+              <a
+                href="/admin"
+                onClick={() => setDropdownOpen(false)}
+                className="block px-4 py-2 text-sm font-medium text-blue-600 hover:bg-accent dark:text-blue-400"
+              >
+                관리자 페이지
+              </a>
+            )}
             <a
               href="/profile"
               onClick={() => setDropdownOpen(false)}
