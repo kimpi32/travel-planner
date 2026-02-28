@@ -17,10 +17,8 @@ interface UploadingFile {
   error?: string;
 }
 
-const isSupabaseConfigured =
-  typeof process !== "undefined" &&
-  !!process.env.NEXT_PUBLIC_SUPABASE_URL &&
-  !!process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+// TODO: S3 또는 다른 스토리지 연동 시 true로 변경
+const isStorageConfigured = false;
 
 export function ImageUploader({
   images,
@@ -163,14 +161,13 @@ export function ImageUploader({
     fileInputRef.current?.click();
   }, []);
 
-  // Supabase 미설정 시 안내 메시지
-  if (!isSupabaseConfigured) {
+  // 스토리지 미설정 시 안내 메시지
+  if (!isStorageConfigured) {
     return (
       <div className="flex items-start gap-2 rounded-lg border border-dashed border-muted-foreground/30 bg-muted/30 px-4 py-3 text-sm text-muted-foreground">
         <Info className="mt-0.5 h-4 w-4 shrink-0" />
         <span>
-          스토리지가 설정되지 않아 이미지 업로드를 사용할 수 없습니다.
-          Supabase Storage를 연결하면 이미지를 첨부할 수 있습니다.
+          이미지 스토리지가 설정되지 않아 업로드를 사용할 수 없습니다.
         </span>
       </div>
     );

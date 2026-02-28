@@ -1,26 +1,16 @@
 import { db } from "@/lib/db/drizzle";
 import { users } from "@/lib/db/schema";
 import { eq } from "drizzle-orm";
-import { createClient } from "./supabase-server";
+import { getSession } from "./session";
 
 export async function getCurrentUser() {
-  const supabase = await createClient();
-
-  if (!supabase) return null;
-
-  const {
-    data: { user: authUser },
-    error,
-  } = await supabase.auth.getUser();
-
-  if (error || !authUser) {
-    return null;
-  }
+  const session = await getSession();
+  if (!session) return null;
 
   const [user] = await db
     .select()
     .from(users)
-    .where(eq(users.authId, authUser.id));
+    .where(eq(users.id, session.userId));
 
   return user ?? null;
 }

@@ -43,7 +43,6 @@ export async function GET(
     // 이메일은 공개하지 않음
     return ok({
       id: user.id,
-      authId: user.authId,
       displayName: user.name,
       bio: user.bio ?? undefined,
       avatarUrl: user.profileImage ?? undefined,

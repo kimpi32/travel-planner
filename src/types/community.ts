@@ -72,7 +72,6 @@ export interface Comment {
 
 export interface UserProfile {
   id: string;
-  authId: string;
   displayName: string;
   bio?: string;
   avatarUrl?: string;

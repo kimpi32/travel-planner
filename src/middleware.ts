@@ -1,80 +1,72 @@
-import { createServerClient, type CookieOptions } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
+import { verifyToken, COOKIE_NAME } from "@/lib/auth/jwt";
 
 const PROTECTED_PATHS = [
   "/planner",
   "/profile",
   "/community/write",
   "/api/trips",
-  "/api/posts",
-  "/api/comments",
-  "/api/bookmarks",
-  "/api/likes",
+  "/api/community/posts",
+  "/api/community/profiles",
+  "/api/community/reports",
 ];
 
-function isProtectedPath(pathname: string): boolean {
+// API 경로 중 GET은 비인증 허용, POST/PUT/PATCH/DELETE만 인증 필요
+const API_GET_ALLOWED = [
+  "/api/community/posts",
+];
+
+function isProtectedPath(pathname: string, method: string): boolean {
+  // API GET 요청은 일부 허용
+  if (method === "GET" && API_GET_ALLOWED.some((p) => pathname.startsWith(p))) {
+    return false;
+  }
   return PROTECTED_PATHS.some((path) => pathname.startsWith(path));
 }
 
 export async function middleware(request: NextRequest) {
-  // Supabase 환경변수가 없으면 미들웨어 스킵
-  if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
-    return NextResponse.next({ request });
+  const { pathname } = request.nextUrl;
+  const method = request.method;
+
+  // 보호된 경로가 아니면 패스
+  if (!isProtectedPath(pathname, method)) {
+    return NextResponse.next();
   }
 
-  let supabaseResponse = NextResponse.next({
-    request,
-  });
+  // JWT 토큰 검증
+  const token = request.cookies.get(COOKIE_NAME)?.value;
 
-  const supabase = createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-    {
-      cookies: {
-        getAll() {
-          return request.cookies.getAll();
-        },
-        setAll(cookiesToSet: { name: string; value: string; options: CookieOptions }[]) {
-          cookiesToSet.forEach(({ name, value }) =>
-            request.cookies.set(name, value),
-          );
-          supabaseResponse = NextResponse.next({
-            request,
-          });
-          cookiesToSet.forEach(({ name, value, options }) =>
-            supabaseResponse.cookies.set(name, value, options),
-          );
-        },
-      },
-    },
-  );
-
-  // 세션 갱신을 위해 getUser 호출 (중요: getSession은 사용하지 않음)
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
-  const { pathname } = request.nextUrl;
-
-  // 보호된 경로에 비인증 사용자가 접근하는 경우 리다이렉트
-  if (isProtectedPath(pathname) && !user) {
+  if (!token) {
+    // API 요청이면 401 응답
+    if (pathname.startsWith("/api/")) {
+      return NextResponse.json({ error: "로그인이 필요합니다." }, { status: 401 });
+    }
+    // 페이지 요청이면 로그인으로 리다이렉트
     const loginUrl = new URL("/auth/login", request.url);
     loginUrl.searchParams.set("redirect", pathname);
     return NextResponse.redirect(loginUrl);
   }
 
-  return supabaseResponse;
+  const payload = await verifyToken(token);
+  if (!payload) {
+    // 유효하지 않은 토큰 → 쿠키 삭제 후 리다이렉트
+    if (pathname.startsWith("/api/")) {
+      const res = NextResponse.json({ error: "세션이 만료되었습니다." }, { status: 401 });
+      res.cookies.set(COOKIE_NAME, "", { path: "/", maxAge: 0 });
+      return res;
+    }
+    const loginUrl = new URL("/auth/login", request.url);
+    loginUrl.searchParams.set("redirect", pathname);
+    const res = NextResponse.redirect(loginUrl);
+    res.cookies.set(COOKIE_NAME, "", { path: "/", maxAge: 0 });
+    return res;
+  }
+
+  return NextResponse.next();
 }
 
 export const config = {
   matcher: [
-    /*
-     * 다음 경로를 제외한 모든 요청에 미들웨어 적용:
-     * - _next/static (정적 파일)
-     * - _next/image (이미지 최적화)
-     * - favicon.ico (파비콘)
-     * - 이미지/폰트 등 정적 자원
-     */
     "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico|woff|woff2|ttf|otf)$).*)",
   ],
 };

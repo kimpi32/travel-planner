@@ -1,6 +1,5 @@
 "use client";
 
-import { createClient } from "@/lib/auth/supabase-browser";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -12,10 +11,7 @@ export default function RegisterForm() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
-  const [success, setSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
-
-  const supabase = createClient();
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -33,48 +29,28 @@ export default function RegisterForm() {
 
     setLoading(true);
 
-    const { error } = await supabase.auth.signUp({
-      email,
-      password,
-      options: {
-        data: { name },
-        emailRedirectTo: `${window.location.origin}/auth/callback`,
-      },
-    });
+    try {
+      const res = await fetch("/api/auth/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, password }),
+      });
 
-    setLoading(false);
+      const data = await res.json();
 
-    if (error) {
-      if (error.message.includes("already registered")) {
-        setError("이미 가입된 이메일 주소입니다.");
-      } else {
-        setError("회원가입 중 오류가 발생했습니다. 다시 시도해주세요.");
+      if (!res.ok) {
+        setError(data.error ?? "회원가입 중 오류가 발생했습니다.");
+        setLoading(false);
+        return;
       }
-      return;
+
+      // 가입 즉시 로그인 상태 → 홈으로 이동
+      router.push("/");
+      router.refresh();
+    } catch {
+      setError("네트워크 오류가 발생했습니다.");
+      setLoading(false);
     }
-
-    setSuccess(true);
-  }
-
-  if (success) {
-    return (
-      <div className="w-full max-w-sm rounded-lg border border-green-200 bg-green-50 p-6 text-center">
-        <p className="text-sm font-medium text-green-700">
-          가입이 완료되었습니다!
-        </p>
-        <p className="mt-1 text-sm text-green-600">
-          입력하신 이메일로 인증 메일이 발송되었습니다.
-          <br />
-          이메일을 확인한 후 로그인해주세요.
-        </p>
-        <button
-          onClick={() => router.push("/auth/login")}
-          className="mt-4 text-sm font-medium text-blue-600 underline underline-offset-2"
-        >
-          로그인 페이지로 이동
-        </button>
-      </div>
-    );
   }
 
   return (

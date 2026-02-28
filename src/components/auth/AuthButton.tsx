@@ -1,32 +1,15 @@
 "use client";
 
-import { createClient } from "@/lib/auth/supabase-browser";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import type { User, Session, AuthChangeEvent } from "@supabase/supabase-js";
+import { useAuth } from "@/hooks/use-auth";
 
-interface AuthButtonProps {
-  initialUser?: User | null;
-  userProfile?: {
-    name: string;
-    profileImage?: string | null;
-  } | null;
-}
-
-export default function AuthButton({ initialUser, userProfile }: AuthButtonProps) {
+export default function AuthButton() {
   const router = useRouter();
-  const supabase = createClient();
+  const { user, isLoading, signOut } = useAuth();
 
-  const [user, setUser] = useState<User | null>(initialUser ?? null);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event: AuthChangeEvent, session: Session | null) => {
-      setUser(session?.user ?? null);
-    });
-    return () => subscription.unsubscribe();
-  }, [supabase]);
 
   // 드롭다운 외부 클릭 닫기
   useEffect(() => {
@@ -40,10 +23,16 @@ export default function AuthButton({ initialUser, userProfile }: AuthButtonProps
   }, []);
 
   async function handleLogout() {
-    await supabase.auth.signOut();
+    await signOut();
     setDropdownOpen(false);
     router.push("/");
     router.refresh();
+  }
+
+  if (isLoading) {
+    return (
+      <div className="h-8 w-16 animate-pulse rounded-lg bg-gray-200" />
+    );
   }
 
   if (!user) {
@@ -57,19 +46,19 @@ export default function AuthButton({ initialUser, userProfile }: AuthButtonProps
     );
   }
 
-  const displayName = userProfile?.name ?? user.email?.split("@")[0] ?? "사용자";
+  const displayName = user.name ?? user.email?.split("@")[0] ?? "사용자";
   const avatarLetter = displayName.charAt(0).toUpperCase();
 
   return (
     <div className="relative" ref={dropdownRef}>
       <button
         onClick={() => setDropdownOpen((prev) => !prev)}
-        className="flex items-center gap-2 rounded-lg px-2 py-1.5 hover:bg-gray-100"
+        className="flex items-center gap-2 rounded-lg px-2 py-1.5 hover:bg-gray-100 dark:hover:bg-gray-800"
         aria-label="사용자 메뉴"
       >
-        {userProfile?.profileImage ? (
+        {user.profileImage ? (
           <img
-            src={userProfile.profileImage}
+            src={user.profileImage}
             alt={displayName}
             className="h-8 w-8 rounded-full object-cover"
           />
@@ -78,7 +67,7 @@ export default function AuthButton({ initialUser, userProfile }: AuthButtonProps
             {avatarLetter}
           </span>
         )}
-        <span className="hidden text-sm font-medium text-gray-700 sm:block">{displayName}</span>
+        <span className="hidden text-sm font-medium sm:block">{displayName}</span>
         <svg
           className={`h-4 w-4 text-gray-500 transition-transform ${dropdownOpen ? "rotate-180" : ""}`}
           fill="none"
@@ -91,31 +80,31 @@ export default function AuthButton({ initialUser, userProfile }: AuthButtonProps
       </button>
 
       {dropdownOpen && (
-        <div className="absolute right-0 z-50 mt-2 w-48 overflow-hidden rounded-lg border border-gray-200 bg-white shadow-lg">
-          <div className="border-b border-gray-100 px-4 py-3">
-            <p className="text-sm font-medium text-gray-900">{displayName}</p>
-            <p className="truncate text-xs text-gray-500">{user.email}</p>
+        <div className="absolute right-0 z-50 mt-2 w-48 overflow-hidden rounded-lg border bg-background shadow-lg">
+          <div className="border-b px-4 py-3">
+            <p className="text-sm font-medium">{displayName}</p>
+            <p className="truncate text-xs text-muted-foreground">{user.email}</p>
           </div>
           <div className="py-1">
             <a
               href="/profile"
               onClick={() => setDropdownOpen(false)}
-              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+              className="block px-4 py-2 text-sm hover:bg-accent"
             >
               내 프로필
             </a>
             <a
               href="/planner"
               onClick={() => setDropdownOpen(false)}
-              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+              className="block px-4 py-2 text-sm hover:bg-accent"
             >
               내 여행 계획
             </a>
           </div>
-          <div className="border-t border-gray-100 py-1">
+          <div className="border-t py-1">
             <button
               onClick={handleLogout}
-              className="block w-full px-4 py-2 text-left text-sm text-red-600 hover:bg-red-50"
+              className="block w-full px-4 py-2 text-left text-sm text-red-600 hover:bg-red-50 dark:hover:bg-red-950"
             >
               로그아웃
             </button>

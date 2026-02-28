@@ -44,7 +44,6 @@ export async function GET() {
 
     return ok({
       id: currentUser.id,
-      authId: currentUser.authId,
       displayName: currentUser.name,
       bio: currentUser.bio ?? undefined,
       avatarUrl: currentUser.profileImage ?? undefined,
@@ -114,7 +113,6 @@ export async function PATCH(req: NextRequest) {
 
     return ok({
       id: updated.id,
-      authId: updated.authId,
       displayName: updated.name,
       bio: updated.bio ?? undefined,
       avatarUrl: updated.profileImage ?? undefined,
