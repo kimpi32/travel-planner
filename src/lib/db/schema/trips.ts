@@ -1,71 +1,71 @@
-import { pgTable, uuid, text, integer, boolean, timestamp, date, time } from "drizzle-orm/pg-core";
+import { mysqlTable, varchar, text, int, boolean, timestamp, date, time, mysqlEnum } from "drizzle-orm/mysql-core";
 import { users } from "./users";
-import { tripStatusEnum, budgetCategoryEnum, tripItemCategoryEnum } from "./enums";
+import { TRIP_STATUS, BUDGET_CATEGORY, TRIP_ITEM_CATEGORY } from "./enums";
 
-export const trips = pgTable("trips", {
-  id: uuid("id").primaryKey().defaultRandom(),
-  userId: uuid("user_id")
+export const trips = mysqlTable("trips", {
+  id: varchar("id", { length: 36 }).primaryKey().$defaultFn(() => crypto.randomUUID()),
+  userId: varchar("user_id", { length: 36 })
     .notNull()
     .references(() => users.id, { onDelete: "cascade" }),
-  title: text("title").notNull(),
-  destination: text("destination").notNull(),
-  destinationId: text("destination_id"),
+  title: varchar("title", { length: 500 }).notNull(),
+  destination: varchar("destination", { length: 500 }).notNull(),
+  destinationId: varchar("destination_id", { length: 255 }),
   coverImage: text("cover_image"),
-  status: tripStatusEnum("status").default("planning").notNull(),
+  status: mysqlEnum("status", TRIP_STATUS).default("planning").notNull(),
   startDate: date("start_date"),
   endDate: date("end_date"),
   notes: text("notes"),
   isPublic: boolean("is_public").default(false).notNull(),
-  createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
-  updatedAt: timestamp("updated_at", { withTimezone: true }).defaultNow().notNull(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
 });
 
-export const tripDays = pgTable("trip_days", {
-  id: uuid("id").primaryKey().defaultRandom(),
-  tripId: uuid("trip_id")
+export const tripDays = mysqlTable("trip_days", {
+  id: varchar("id", { length: 36 }).primaryKey().$defaultFn(() => crypto.randomUUID()),
+  tripId: varchar("trip_id", { length: 36 })
     .notNull()
     .references(() => trips.id, { onDelete: "cascade" }),
-  dayNumber: integer("day_number").notNull(),
+  dayNumber: int("day_number").notNull(),
   date: date("date"),
-  title: text("title"),
+  title: varchar("title", { length: 500 }),
   notes: text("notes"),
-  createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
-  updatedAt: timestamp("updated_at", { withTimezone: true }).defaultNow().notNull(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
 });
 
-export const tripItems = pgTable("trip_items", {
-  id: uuid("id").primaryKey().defaultRandom(),
-  tripDayId: uuid("trip_day_id")
+export const tripItems = mysqlTable("trip_items", {
+  id: varchar("id", { length: 36 }).primaryKey().$defaultFn(() => crypto.randomUUID()),
+  tripDayId: varchar("trip_day_id", { length: 36 })
     .notNull()
     .references(() => tripDays.id, { onDelete: "cascade" }),
-  category: tripItemCategoryEnum("category").default("other").notNull(),
-  title: text("title").notNull(),
+  category: mysqlEnum("category", TRIP_ITEM_CATEGORY).default("other").notNull(),
+  title: varchar("title", { length: 500 }).notNull(),
   description: text("description"),
-  location: text("location"),
-  address: text("address"),
+  location: varchar("location", { length: 500 }),
+  address: varchar("address", { length: 500 }),
   startTime: time("start_time"),
   endTime: time("end_time"),
-  cost: integer("cost"),
-  currency: text("currency").default("KRW"),
-  reservationNumber: text("reservation_number"),
+  cost: int("cost"),
+  currency: varchar("currency", { length: 10 }).default("KRW"),
+  reservationNumber: varchar("reservation_number", { length: 255 }),
   url: text("url"),
   notes: text("notes"),
-  sortOrder: integer("sort_order").default(0).notNull(),
-  createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
-  updatedAt: timestamp("updated_at", { withTimezone: true }).defaultNow().notNull(),
+  sortOrder: int("sort_order").default(0).notNull(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
 });
 
-export const budgetItems = pgTable("budget_items", {
-  id: uuid("id").primaryKey().defaultRandom(),
-  tripId: uuid("trip_id")
+export const budgetItems = mysqlTable("budget_items", {
+  id: varchar("id", { length: 36 }).primaryKey().$defaultFn(() => crypto.randomUUID()),
+  tripId: varchar("trip_id", { length: 36 })
     .notNull()
     .references(() => trips.id, { onDelete: "cascade" }),
-  category: budgetCategoryEnum("category").default("other").notNull(),
-  title: text("title").notNull(),
-  amount: integer("amount").notNull(),
-  currency: text("currency").default("KRW").notNull(),
+  category: mysqlEnum("category", BUDGET_CATEGORY).default("other").notNull(),
+  title: varchar("title", { length: 500 }).notNull(),
+  amount: int("amount").notNull(),
+  currency: varchar("currency", { length: 10 }).default("KRW").notNull(),
   isPaid: boolean("is_paid").default(false).notNull(),
   notes: text("notes"),
-  createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
-  updatedAt: timestamp("updated_at", { withTimezone: true }).defaultNow().notNull(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
 });

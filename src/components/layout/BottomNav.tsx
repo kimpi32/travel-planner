@@ -3,13 +3,14 @@
 import * as React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Map, Sparkles, CalendarDays, User } from "lucide-react";
+import { Map, Sparkles, CalendarDays, MessageSquare, User } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const navItems = [
   { href: "/", label: "탐색", icon: Map },
   { href: "/estimate", label: "AI 견적", icon: Sparkles },
   { href: "/planner", label: "내 여행", icon: CalendarDays },
+  { href: "/community", label: "커뮤니티", icon: MessageSquare },
   { href: "/profile", label: "프로필", icon: User },
 ];
 

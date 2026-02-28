@@ -161,19 +161,23 @@ export async function PUT(
       return err("출발일이 도착일보다 늦을 수 없습니다.", 400);
     }
 
-    const [updated] = await db
+    await db
       .update(trips)
       .set({
         ...(title !== undefined && { title }),
         ...(destination !== undefined && { destination }),
-        ...(startDate !== undefined && { startDate }),
-        ...(endDate !== undefined && { endDate }),
+        ...(startDate !== undefined && { startDate: new Date(startDate) }),
+        ...(endDate !== undefined && { endDate: new Date(endDate) }),
         ...(coverImage !== undefined && { coverImage }),
         ...(isPublic !== undefined && { isPublic }),
         updatedAt: new Date(),
       })
-      .where(eq(trips.id, id))
-      .returning();
+      .where(eq(trips.id, id));
+
+    const [updated] = await db
+      .select()
+      .from(trips)
+      .where(eq(trips.id, id));
 
     return ok({
       id: updated.id,

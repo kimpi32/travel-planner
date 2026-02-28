@@ -83,11 +83,15 @@ export async function PATCH(req: NextRequest) {
     if (bio !== undefined) updateData.bio = bio;
     if (avatarUrl !== undefined) updateData.profileImage = avatarUrl;
 
-    const [updated] = await db
+    await db
       .update(users)
       .set(updateData)
-      .where(eq(users.id, currentUser.id))
-      .returning();
+      .where(eq(users.id, currentUser.id));
+
+    const [updated] = await db
+      .select()
+      .from(users)
+      .where(eq(users.id, currentUser.id));
 
     const [postCountRow] = await db
       .select({ count: count() })

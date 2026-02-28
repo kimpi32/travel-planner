@@ -135,7 +135,7 @@ export async function POST(
 
   // 트랜잭션: 댓글 삽입 + commentCount 증가
   const newComment = await db.transaction(async (tx) => {
-    const [inserted] = await tx
+    const insertResult = await tx
       .insert(comments)
       .values({
         postId,
@@ -143,12 +143,17 @@ export async function POST(
         body: commentBody,
         parentCommentId: parentCommentId ?? null,
       })
-      .returning();
+      .$returningId();
 
     await tx
       .update(posts)
       .set({ commentCount: post.commentCount + 1 })
       .where(eq(posts.id, postId));
+
+    const [inserted] = await tx
+      .select()
+      .from(comments)
+      .where(eq(comments.id, insertResult[0].id));
 
     return inserted;
   });

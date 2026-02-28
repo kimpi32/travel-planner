@@ -156,7 +156,7 @@ export async function checkAndAwardBadges(userId: string): Promise<string[]> {
 
   if (newBadgeIds.length === 0) return [];
 
-  // 새 배지 일괄 삽입 (충돌 시 무시)
+  // 새 배지 일괄 삽입 (충돌 시 무시 — ON DUPLICATE KEY UPDATE id=id)
   await db
     .insert(userBadges)
     .values(
@@ -165,7 +165,7 @@ export async function checkAndAwardBadges(userId: string): Promise<string[]> {
         badgeId,
       }))
     )
-    .onConflictDoNothing();
+    .onDuplicateKeyUpdate({ set: { id: sql`id` } });
 
   return newBadgeIds;
 }

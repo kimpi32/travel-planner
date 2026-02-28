@@ -1,6 +1,7 @@
 import { NextRequest } from "next/server";
 import { db } from "@/lib/db/drizzle";
 import { reports } from "@/lib/db/schema";
+import { eq } from "drizzle-orm";
 import { getCurrentUser } from "@/lib/auth/get-user";
 import { ok, err } from "@/lib/api/response";
 import { z } from "zod";
@@ -38,7 +39,7 @@ export async function POST(request: NextRequest) {
 
     const { targetType, targetId, reason } = parsed.data;
 
-    const [newReport] = await db
+    const insertResult = await db
       .insert(reports)
       .values({
         reporterId: currentUser.id,
@@ -47,7 +48,12 @@ export async function POST(request: NextRequest) {
         reason,
         status: "pending",
       })
-      .returning();
+      .$returningId();
+
+    const [newReport] = await db
+      .select()
+      .from(reports)
+      .where(eq(reports.id, insertResult[0].id));
 
     return ok(
       {

@@ -162,21 +162,21 @@ export async function PATCH(request: NextRequest, context: RouteContext) {
       updateValues.type = (CATEGORY_TO_TYPE[data.category] ?? data.category) as typeof posts.type._.data;
     }
 
-    const [updatedPost] = await db
+    await db
       .update(posts)
       .set(updateValues)
-      .where(eq(posts.id, postId))
-      .returning();
+      .where(eq(posts.id, postId));
 
-    // 작성자 정보 조회
-    const [authorRow] = await db
-      .select()
-      .from(users)
-      .where(eq(users.id, currentUser.id))
+    // 업데이트된 게시글 + 작성자 정보 조회
+    const [updatedRow] = await db
+      .select({ post: posts, user: users })
+      .from(posts)
+      .innerJoin(users, eq(posts.userId, users.id))
+      .where(eq(posts.id, postId))
       .limit(1);
 
     const responsePost = mapDbPostToResponse(
-      { post: updatedPost, user: authorRow },
+      updatedRow,
       false,
       false,
     );

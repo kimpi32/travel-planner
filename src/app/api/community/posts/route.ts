@@ -131,7 +131,7 @@ export async function GET(request: NextRequest) {
             and(
               eq(likes.userId, currentUser.id),
               eq(likes.targetType, "post"),
-              sql`${likes.targetId} = ANY(ARRAY[${sql.join(postIds.map((id) => sql`${id}::uuid`), sql`, `)}]::uuid[])`,
+              sql`${likes.targetId} IN (${sql.join(postIds.map((id) => sql`${id}`), sql`, `)})`,
             ),
           ),
         db
@@ -141,7 +141,7 @@ export async function GET(request: NextRequest) {
             and(
               eq(bookmarks.userId, currentUser.id),
               eq(bookmarks.targetType, "post"),
-              sql`${bookmarks.targetId} = ANY(ARRAY[${sql.join(postIds.map((id) => sql`${id}`), sql`, `)}])`,
+              sql`${bookmarks.targetId} IN (${sql.join(postIds.map((id) => sql`${id}`), sql`, `)})`,
             ),
           ),
       ]);
@@ -195,7 +195,7 @@ export async function POST(request: NextRequest) {
     const data = parseResult.data!;
     const dbType = (CATEGORY_TO_TYPE[data.category] ?? data.category) as typeof posts.type._.data;
 
-    const [newPost] = await db
+    const insertResult = await db
       .insert(posts)
       .values({
         userId: currentUser.id,
@@ -205,7 +205,12 @@ export async function POST(request: NextRequest) {
         destinationId: data.destination ?? null,
         rating: null,
       })
-      .returning();
+      .$returningId();
+
+    const [newPost] = await db
+      .select()
+      .from(posts)
+      .where(eq(posts.id, insertResult[0].id));
 
     const responsePost = mapDbPostToResponse(
       { post: newPost, user: currentUser },

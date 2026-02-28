@@ -32,13 +32,17 @@ export async function POST(
         // 이미 좋아요 → 취소
         await tx.delete(likes).where(eq(likes.id, existing.id));
 
-        const [updated] = await tx
+        await tx
           .update(comments)
           .set({ likeCount: sql`GREATEST(${comments.likeCount} - 1, 0)` })
-          .where(eq(comments.id, commentId))
-          .returning({ likeCount: comments.likeCount });
+          .where(eq(comments.id, commentId));
 
-        return { liked: false, likeCount: updated.likeCount };
+        const [updated1] = await tx
+          .select({ likeCount: comments.likeCount })
+          .from(comments)
+          .where(eq(comments.id, commentId));
+
+        return { liked: false, likeCount: updated1.likeCount };
       } else {
         // 좋아요 추가
         await tx.insert(likes).values({
@@ -47,13 +51,17 @@ export async function POST(
           targetId: commentId,
         });
 
-        const [updated] = await tx
+        await tx
           .update(comments)
           .set({ likeCount: sql`${comments.likeCount} + 1` })
-          .where(eq(comments.id, commentId))
-          .returning({ likeCount: comments.likeCount });
+          .where(eq(comments.id, commentId));
 
-        return { liked: true, likeCount: updated.likeCount };
+        const [updated2] = await tx
+          .select({ likeCount: comments.likeCount })
+          .from(comments)
+          .where(eq(comments.id, commentId));
+
+        return { liked: true, likeCount: updated2.likeCount };
       }
     });
 

@@ -15,6 +15,7 @@ const navLinks = [
   { href: "/", label: "여행지" },
   { href: "/estimate", label: "AI 견적" },
   { href: "/planner", label: "내 여행" },
+  { href: "/community", label: "커뮤니티" },
 ];
 
 export function Header() {
@@ -59,8 +60,8 @@ export function Header() {
         <div className="ml-auto flex items-center gap-2 md:ml-0">
           <ThemeToggle />
           <NotificationBell />
-          <Button variant="outline" size="sm" className="hidden md:flex">
-            로그인
+          <Button variant="outline" size="sm" className="hidden md:flex" asChild>
+            <Link href="/auth/login">로그인</Link>
           </Button>
           {/* 모바일 메뉴 */}
           <MobileNav />

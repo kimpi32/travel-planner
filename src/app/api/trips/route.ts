@@ -126,33 +126,43 @@ export async function POST(req: NextRequest) {
 
     // 트랜잭션으로 trip + tripDays 생성
     const result = await db.transaction(async (tx) => {
-      const [newTrip] = await tx
+      const tripInsert = await tx
         .insert(trips)
         .values({
           userId: currentUser.id,
           title,
           destination,
-          startDate,
-          endDate,
+          startDate: new Date(startDate),
+          endDate: new Date(endDate),
           coverImage: coverImage ?? null,
           isPublic: isPublic ?? false,
           status: "planning",
         })
-        .returning();
+        .$returningId();
+
+      const [newTrip] = await tx
+        .select()
+        .from(trips)
+        .where(eq(trips.id, tripInsert[0].id));
 
       // startDate ~ endDate 날짜 범위로 tripDays 자동 생성
       const dateRange = generateDateRange(startDate, endDate);
-      const newDays = await tx
+      const dayInserts = await tx
         .insert(tripDays)
         .values(
           dateRange.map((date, index) => ({
             tripId: newTrip.id,
             dayNumber: index + 1,
-            date,
+            date: new Date(date),
             title: `Day ${index + 1}`,
           }))
         )
-        .returning();
+        .$returningId();
+
+      const newDays = await tx
+        .select()
+        .from(tripDays)
+        .where(inArray(tripDays.id, dayInserts.map((d: { id: string }) => d.id)));
 
       return { trip: newTrip, days: newDays };
     });
@@ -169,7 +179,7 @@ export async function POST(req: NextRequest) {
         endDate: result.trip.endDate,
         notes: result.trip.notes,
         isPublic: result.trip.isPublic,
-        days: result.days.map((day) => ({
+        days: result.days.map((day: typeof tripDays.$inferSelect) => ({
           id: day.id,
           dayNumber: day.dayNumber,
           date: day.date,

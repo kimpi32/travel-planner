@@ -85,8 +85,8 @@ export async function PATCH(req: NextRequest, { params }: Params) {
     }
 
     // 트랜잭션으로 일괄 업데이트
-    const updatedItems = await db.transaction(async (tx) => {
-      const results = await Promise.all(
+    await db.transaction(async (tx) => {
+      await Promise.all(
         items.map((item) =>
           tx
             .update(tripItems)
@@ -96,15 +96,19 @@ export async function PATCH(req: NextRequest, { params }: Params) {
               updatedAt: new Date(),
             })
             .where(eq(tripItems.id, item.id))
-            .returning({
-              id: tripItems.id,
-              tripDayId: tripItems.tripDayId,
-              sortOrder: tripItems.sortOrder,
-            })
         )
       );
-      return results.flat();
     });
+
+    // 업데이트된 항목 조회
+    const updatedItems = await db
+      .select({
+        id: tripItems.id,
+        tripDayId: tripItems.tripDayId,
+        sortOrder: tripItems.sortOrder,
+      })
+      .from(tripItems)
+      .where(inArray(tripItems.id, itemIds));
 
     return ok({
       updated: updatedItems.length,

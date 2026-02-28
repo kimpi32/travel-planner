@@ -112,7 +112,7 @@ export async function POST(req: NextRequest, { params }: Params) {
       sortOrder = (maxRow?.max ?? -1) + 1;
     }
 
-    const [newItem] = await db
+    const itemInsert = await db
       .insert(tripItems)
       .values({
         tripDayId: data.tripDayId,
@@ -130,7 +130,12 @@ export async function POST(req: NextRequest, { params }: Params) {
         notes: data.notes ?? null,
         sortOrder,
       })
-      .returning();
+      .$returningId();
+
+    const [newItem] = await db
+      .select()
+      .from(tripItems)
+      .where(eq(tripItems.id, itemInsert[0].id));
 
     return ok(
       {
@@ -208,7 +213,7 @@ export async function PATCH(req: NextRequest, { params }: Params) {
       }
     }
 
-    const [updated] = await db
+    await db
       .update(tripItems)
       .set({
         ...(tripDayId !== undefined && { tripDayId }),
@@ -229,8 +234,12 @@ export async function PATCH(req: NextRequest, { params }: Params) {
         ...(updateFields.sortOrder !== undefined && { sortOrder: updateFields.sortOrder }),
         updatedAt: new Date(),
       })
-      .where(eq(tripItems.id, itemId))
-      .returning();
+      .where(eq(tripItems.id, itemId));
+
+    const [updated] = await db
+      .select()
+      .from(tripItems)
+      .where(eq(tripItems.id, itemId));
 
     return ok({
       id: updated.id,

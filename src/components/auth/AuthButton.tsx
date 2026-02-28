@@ -3,7 +3,7 @@
 import { createClient } from "@/lib/auth/supabase-browser";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import type { User } from "@supabase/supabase-js";
+import type { User, Session, AuthChangeEvent } from "@supabase/supabase-js";
 
 interface AuthButtonProps {
   initialUser?: User | null;
@@ -22,7 +22,7 @@ export default function AuthButton({ initialUser, userProfile }: AuthButtonProps
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event: AuthChangeEvent, session: Session | null) => {
       setUser(session?.user ?? null);
     });
     return () => subscription.unsubscribe();

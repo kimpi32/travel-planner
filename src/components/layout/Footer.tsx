@@ -6,6 +6,7 @@ const serviceLinks = [
   { href: "/", label: "여행지 탐색" },
   { href: "/estimate", label: "AI 견적" },
   { href: "/planner", label: "내 여행 플래너" },
+  { href: "/community", label: "커뮤니티" },
 ];
 
 const infoLinks = [

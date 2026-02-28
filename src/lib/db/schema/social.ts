@@ -1,20 +1,20 @@
-import { pgTable, uuid, text, timestamp, uniqueIndex, boolean } from "drizzle-orm/pg-core";
+import { mysqlTable, varchar, text, timestamp, boolean, uniqueIndex, mysqlEnum } from "drizzle-orm/mysql-core";
 import { users } from "./users";
-import { bookmarkTargetEnum, likeTargetEnum, notificationTypeEnum } from "./enums";
+import { BOOKMARK_TARGET, LIKE_TARGET, NOTIFICATION_TYPE } from "./enums";
 import { posts } from "./posts";
 import { comments } from "./comments";
 
-export const bookmarks = pgTable(
+export const bookmarks = mysqlTable(
   "bookmarks",
   {
-    id: uuid("id").primaryKey().defaultRandom(),
-    userId: uuid("user_id")
+    id: varchar("id", { length: 36 }).primaryKey().$defaultFn(() => crypto.randomUUID()),
+    userId: varchar("user_id", { length: 36 })
       .notNull()
       .references(() => users.id, { onDelete: "cascade" }),
-    targetType: bookmarkTargetEnum("target_type").notNull(),
-    targetId: text("target_id").notNull(),
-    collectionId: uuid("collection_id"),
-    createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
+    targetType: mysqlEnum("target_type", BOOKMARK_TARGET).notNull(),
+    targetId: varchar("target_id", { length: 255 }).notNull(),
+    collectionId: varchar("collection_id", { length: 36 }),
+    createdAt: timestamp("created_at").defaultNow().notNull(),
   },
   (table) => [
     uniqueIndex("bookmarks_user_target_unique").on(
@@ -25,29 +25,29 @@ export const bookmarks = pgTable(
   ]
 );
 
-export const collections = pgTable("collections", {
-  id: uuid("id").primaryKey().defaultRandom(),
-  userId: uuid("user_id")
+export const collections = mysqlTable("collections", {
+  id: varchar("id", { length: 36 }).primaryKey().$defaultFn(() => crypto.randomUUID()),
+  userId: varchar("user_id", { length: 36 })
     .notNull()
     .references(() => users.id, { onDelete: "cascade" }),
-  name: text("name").notNull(),
+  name: varchar("name", { length: 255 }).notNull(),
   description: text("description"),
   coverImage: text("cover_image"),
-  createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
-  updatedAt: timestamp("updated_at", { withTimezone: true }).defaultNow().notNull(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
 });
 
-export const follows = pgTable(
+export const follows = mysqlTable(
   "follows",
   {
-    id: uuid("id").primaryKey().defaultRandom(),
-    followerId: uuid("follower_id")
+    id: varchar("id", { length: 36 }).primaryKey().$defaultFn(() => crypto.randomUUID()),
+    followerId: varchar("follower_id", { length: 36 })
       .notNull()
       .references(() => users.id, { onDelete: "cascade" }),
-    followingId: uuid("following_id")
+    followingId: varchar("following_id", { length: 36 })
       .notNull()
       .references(() => users.id, { onDelete: "cascade" }),
-    createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
+    createdAt: timestamp("created_at").defaultNow().notNull(),
   },
   (table) => [
     uniqueIndex("follows_follower_following_unique").on(
@@ -57,31 +57,31 @@ export const follows = pgTable(
   ]
 );
 
-export const notifications = pgTable("notifications", {
-  id: uuid("id").primaryKey().defaultRandom(),
-  userId: uuid("user_id")
+export const notifications = mysqlTable("notifications", {
+  id: varchar("id", { length: 36 }).primaryKey().$defaultFn(() => crypto.randomUUID()),
+  userId: varchar("user_id", { length: 36 })
     .notNull()
     .references(() => users.id, { onDelete: "cascade" }),
-  type: notificationTypeEnum("type").notNull(),
-  actorId: uuid("actor_id")
+  type: mysqlEnum("type", NOTIFICATION_TYPE).notNull(),
+  actorId: varchar("actor_id", { length: 36 })
     .notNull()
     .references(() => users.id, { onDelete: "cascade" }),
-  postId: uuid("post_id").references(() => posts.id, { onDelete: "cascade" }),
-  commentId: uuid("comment_id").references(() => comments.id, { onDelete: "cascade" }),
+  postId: varchar("post_id", { length: 36 }).references(() => posts.id, { onDelete: "cascade" }),
+  commentId: varchar("comment_id", { length: 36 }).references(() => comments.id, { onDelete: "cascade" }),
   read: boolean("read").default(false).notNull(),
-  createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 
-export const likes = pgTable(
+export const likes = mysqlTable(
   "likes",
   {
-    id: uuid("id").primaryKey().defaultRandom(),
-    userId: uuid("user_id")
+    id: varchar("id", { length: 36 }).primaryKey().$defaultFn(() => crypto.randomUUID()),
+    userId: varchar("user_id", { length: 36 })
       .notNull()
       .references(() => users.id, { onDelete: "cascade" }),
-    targetType: likeTargetEnum("target_type").notNull(),
-    targetId: uuid("target_id").notNull(),
-    createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
+    targetType: mysqlEnum("target_type", LIKE_TARGET).notNull(),
+    targetId: varchar("target_id", { length: 36 }).notNull(),
+    createdAt: timestamp("created_at").defaultNow().notNull(),
   },
   (table) => [
     uniqueIndex("likes_user_target_unique").on(
@@ -94,15 +94,15 @@ export const likes = pgTable(
 
 // ─── 배지 ────────────────────────────────────────────────────────────────────
 
-export const userBadges = pgTable(
+export const userBadges = mysqlTable(
   "user_badges",
   {
-    id: uuid("id").primaryKey().defaultRandom(),
-    userId: uuid("user_id")
+    id: varchar("id", { length: 36 }).primaryKey().$defaultFn(() => crypto.randomUUID()),
+    userId: varchar("user_id", { length: 36 })
       .notNull()
       .references(() => users.id, { onDelete: "cascade" }),
-    badgeId: text("badge_id").notNull(),
-    earnedAt: timestamp("earned_at", { withTimezone: true }).defaultNow().notNull(),
+    badgeId: varchar("badge_id", { length: 255 }).notNull(),
+    earnedAt: timestamp("earned_at").defaultNow().notNull(),
   },
   (table) => [
     uniqueIndex("user_badges_user_badge_unique").on(table.userId, table.badgeId),
@@ -111,14 +111,14 @@ export const userBadges = pgTable(
 
 // ─── 신고 ────────────────────────────────────────────────────────────────────
 
-export const reports = pgTable("reports", {
-  id: uuid("id").primaryKey().defaultRandom(),
-  reporterId: uuid("reporter_id")
+export const reports = mysqlTable("reports", {
+  id: varchar("id", { length: 36 }).primaryKey().$defaultFn(() => crypto.randomUUID()),
+  reporterId: varchar("reporter_id", { length: 36 })
     .notNull()
     .references(() => users.id, { onDelete: "cascade" }),
-  targetType: text("target_type").$type<"post" | "comment">().notNull(),
-  targetId: text("target_id").notNull(),
+  targetType: mysqlEnum("target_type", ["post", "comment"]).notNull(),
+  targetId: varchar("target_id", { length: 255 }).notNull(),
   reason: text("reason").notNull(),
-  status: text("status").$type<"pending" | "reviewed" | "dismissed">().default("pending").notNull(),
-  createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
+  status: mysqlEnum("status", ["pending", "reviewed", "dismissed"]).default("pending").notNull(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
 });

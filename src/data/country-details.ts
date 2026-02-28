@@ -37,7 +37,34 @@ export interface CountryDetail {
   tips: string[];
 }
 
+import { eastAsiaDetails } from "./country-info/east-asia";
+import { southeastAsiaDetails } from "./country-info/southeast-asia";
+import { southCentralAsiaDetails } from "./country-info/south-central-asia";
+import { middleEastDetails } from "./country-info/middle-east";
+import { centralEuropeDetails } from "./country-info/central-europe";
+import { southernEuropeDetails } from "./country-info/southern-europe";
+import { northernEuropeDetails } from "./country-info/northern-europe";
+import { easternEuropeBalkansDetails } from "./country-info/eastern-europe-balkans";
+import { northAmericaDetails } from "./country-info/north-america";
+import { southAmericaDetails } from "./country-info/south-america";
+import { africaDetails } from "./country-info/africa";
+import { oceaniaDetails } from "./country-info/oceania";
+
 export const countryDetails: Record<string, CountryDetail> = {
+  // --- Imported region data ---
+  ...eastAsiaDetails,
+  ...southeastAsiaDetails,
+  ...southCentralAsiaDetails,
+  ...middleEastDetails,
+  ...centralEuropeDetails,
+  ...southernEuropeDetails,
+  ...northernEuropeDetails,
+  ...easternEuropeBalkansDetails,
+  ...northAmericaDetails,
+  ...southAmericaDetails,
+  ...africaDetails,
+  ...oceaniaDetails,
+  // --- Inline data (Western Europe) ---
   germany: {
     heroGradient: "from-gray-900 via-red-900 to-yellow-700",
     intro:

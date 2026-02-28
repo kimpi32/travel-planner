@@ -1,10 +1,13 @@
-import { drizzle } from "drizzle-orm/postgres-js";
-import postgres from "postgres";
+import { drizzle } from "drizzle-orm/mysql2";
+import mysql from "mysql2/promise";
 import * as schema from "./schema";
 
-const connectionString = process.env.DATABASE_URL!;
+const pool = mysql.createPool({
+  host: process.env.DB_HOST,
+  port: Number(process.env.DB_PORT || 3306),
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
+});
 
-// Supabase 풀러 호환을 위해 prepare: false 설정
-const client = postgres(connectionString, { prepare: false });
-
-export const db = drizzle(client, { schema });
+export const db = drizzle(pool, { schema, mode: "default" });

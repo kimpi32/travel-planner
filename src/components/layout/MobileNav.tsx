@@ -3,7 +3,7 @@
 import * as React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, Map, Sparkles, CalendarDays, User } from "lucide-react";
+import { Menu, Map, Sparkles, CalendarDays, MessageSquare, User } from "lucide-react";
 import { Dialog } from "radix-ui";
 import { Button } from "@/components/ui/button";
 import SearchBar from "@/components/search/SearchBar";
@@ -13,6 +13,7 @@ const navLinks = [
   { href: "/", label: "여행지 탐색", icon: Map },
   { href: "/estimate", label: "AI 견적", icon: Sparkles },
   { href: "/planner", label: "내 여행", icon: CalendarDays },
+  { href: "/community", label: "커뮤니티", icon: MessageSquare },
   { href: "/profile", label: "프로필", icon: User },
 ];
 
@@ -55,8 +56,8 @@ export function MobileNav() {
               ))}
             </nav>
             <div className="mt-auto">
-              <Button className="w-full" variant="outline">
-                로그인
+              <Button className="w-full" variant="outline" asChild>
+                <Link href="/auth/login" onClick={() => setOpen(false)}>로그인</Link>
               </Button>
             </div>
           </div>
