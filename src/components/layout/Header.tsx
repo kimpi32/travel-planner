@@ -9,6 +9,8 @@ import { ThemeToggle } from "@/components/ui/theme-toggle";
 import SearchBar from "@/components/search/SearchBar";
 import { MobileNav } from "@/components/layout/MobileNav";
 import { NotificationBell } from "@/components/layout/NotificationBell";
+import AuthButton from "@/components/auth/AuthButton";
+import { useAuth } from "@/hooks/use-auth";
 import { cn } from "@/lib/utils";
 
 const navLinks = [
@@ -20,6 +22,7 @@ const navLinks = [
 
 export function Header() {
   const pathname = usePathname();
+  const { user, isLoading } = useAuth();
 
   return (
     <header className="sticky top-0 z-40 border-b bg-background/80 backdrop-blur-sm">
@@ -60,9 +63,17 @@ export function Header() {
         <div className="ml-auto flex items-center gap-2 md:ml-0">
           <ThemeToggle />
           <NotificationBell />
-          <Button variant="outline" size="sm" className="hidden md:flex" asChild>
-            <Link href="/auth/login">로그인</Link>
-          </Button>
+          <div className="hidden md:block">
+            {isLoading ? (
+              <div className="h-8 w-16 animate-pulse rounded-lg bg-gray-200" />
+            ) : user ? (
+              <AuthButton />
+            ) : (
+              <Button variant="outline" size="sm" asChild>
+                <Link href="/auth/login">로그인</Link>
+              </Button>
+            )}
+          </div>
           {/* 모바일 메뉴 */}
           <MobileNav />
         </div>

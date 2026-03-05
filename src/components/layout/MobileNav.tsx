@@ -10,7 +10,7 @@ import SearchBar from "@/components/search/SearchBar";
 import { cn } from "@/lib/utils";
 
 const navLinks = [
-  { href: "/", label: "여행지 탐색", icon: Map },
+  { href: "/", label: "여행지", icon: Map },
   { href: "/estimate", label: "AI 견적", icon: Sparkles },
   { href: "/planner", label: "내 여행", icon: CalendarDays },
   { href: "/community", label: "커뮤니티", icon: MessageSquare },

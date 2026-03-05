@@ -17,6 +17,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://travel.supports.work"),
   title: "여행 플래너 | Travel Planner",
   description: "AI 여행 견적 에이전트와 함께하는 스마트 여행 계획",
 };

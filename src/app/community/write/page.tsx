@@ -12,7 +12,7 @@ function WritePageContent() {
 
   useEffect(() => {
     if (!isLoading && !user) {
-      router.replace("/auth/login?next=/community/write");
+      router.replace("/auth/login?redirect=/community/write");
     }
   }, [user, isLoading, router]);
 

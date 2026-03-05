@@ -1,6 +1,6 @@
 "use client";
 
-import { use } from "react";
+import { use, useState } from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
@@ -13,6 +13,13 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Input } from "@/components/ui/input";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import {
   Select,
   SelectContent,
@@ -56,8 +63,32 @@ export default function TripDetailPage({
 
   const trip = trips.find((t) => t.id === tripId);
 
+  const [editOpen, setEditOpen] = useState(false);
+  const [editTitle, setEditTitle] = useState("");
+  const [editDestination, setEditDestination] = useState("");
+  const [editTravelers, setEditTravelers] = useState("2");
+
   if (!trip) {
     notFound();
+    return null; // unreachable, but helps TypeScript narrow the type
+  }
+
+  function openEditDialog() {
+    setEditTitle(trip!.title);
+    setEditDestination(trip!.destination);
+    setEditTravelers(String(trip!.travelers));
+    setEditOpen(true);
+  }
+
+  function handleEditSave(e: React.FormEvent) {
+    e.preventDefault();
+    if (!editTitle.trim() || !editDestination.trim()) return;
+    updateTrip(trip!.id, {
+      title: editTitle.trim(),
+      destination: editDestination.trim(),
+      travelers: parseInt(editTravelers),
+    });
+    setEditOpen(false);
   }
 
   const statusConfig = STATUS_CONFIG[trip.status];
@@ -114,11 +145,47 @@ export default function TripDetailPage({
 
           <ShareItineraryButton trip={trip} size="sm" variant="outline" />
 
-          <Button variant="ghost" size="icon-sm" title="여행 정보 수정">
+          <Button variant="ghost" size="icon-sm" title="여행 정보 수정" onClick={openEditDialog}>
             <Pencil className="size-4" />
           </Button>
         </div>
       </header>
+
+      {/* Edit trip dialog */}
+      <Dialog open={editOpen} onOpenChange={setEditOpen}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle>여행 정보 수정</DialogTitle>
+          </DialogHeader>
+          <form onSubmit={handleEditSave} className="flex flex-col gap-4 pt-2">
+            <div className="flex flex-col gap-1.5">
+              <label className="text-sm font-medium">여행 제목</label>
+              <Input value={editTitle} onChange={(e) => setEditTitle(e.target.value)} />
+            </div>
+            <div className="flex flex-col gap-1.5">
+              <label className="text-sm font-medium">여행지</label>
+              <Input value={editDestination} onChange={(e) => setEditDestination(e.target.value)} />
+            </div>
+            <div className="flex flex-col gap-1.5">
+              <label className="text-sm font-medium">여행인원</label>
+              <Select value={editTravelers} onValueChange={setEditTravelers}>
+                <SelectTrigger>
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  {Array.from({ length: 10 }, (_, i) => i + 1).map((n) => (
+                    <SelectItem key={n} value={String(n)}>{n}명</SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+            <div className="flex justify-end gap-2 pt-1">
+              <Button type="button" variant="outline" onClick={() => setEditOpen(false)}>취소</Button>
+              <Button type="submit">저장</Button>
+            </div>
+          </form>
+        </DialogContent>
+      </Dialog>
 
       {/* Trip meta bar */}
       <div className="border-b bg-muted/30">

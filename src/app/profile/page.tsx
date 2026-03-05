@@ -15,7 +15,7 @@ function OwnProfileContent() {
 
   useEffect(() => {
     if (!authLoading && !user) {
-      router.replace("/auth/login?next=/profile");
+      router.replace("/auth/login?redirect=/profile");
     }
   }, [user, authLoading, router]);
 
