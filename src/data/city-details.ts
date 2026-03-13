@@ -158,6 +158,8 @@ import { argentinaCityDetails, argentinaAttractionDetails } from "./city-details
 import { peruCityDetails, peruAttractionDetails } from "./city-details/peru";
 import { chileCityDetails, chileAttractionDetails } from "./city-details/chile";
 import { colombiaCityDetails, colombiaAttractionDetails } from "./city-details/colombia";
+// Central America
+import { costaRicaCityDetails, costaRicaAttractionDetails } from "./city-details/costa-rica";
 // North America
 import { usaCityDetails, usaAttractionDetails } from "./city-details/usa";
 import { canadaCityDetails, canadaAttractionDetails } from "./city-details/canada";
@@ -186,6 +188,7 @@ Object.assign(
   indiaCityDetails, nepalCityDetails, sriLankaCityDetails,
   uzbekistanCityDetails, kazakhstanCityDetails,
   brazilCityDetails, argentinaCityDetails, peruCityDetails, chileCityDetails, colombiaCityDetails,
+  costaRicaCityDetails,
   usaCityDetails, canadaCityDetails, mexicoCityDetails,
   australiaCityDetails, newZealandCityDetails,
   moroccoCityDetails, egyptCityDetails, southAfricaCityDetails, kenyaCityDetails, tanzaniaCityDetails,
@@ -204,6 +207,7 @@ Object.assign(
   indiaAttractionDetails, nepalAttractionDetails, sriLankaAttractionDetails,
   uzbekistanAttractionDetails, kazakhstanAttractionDetails,
   brazilAttractionDetails, argentinaAttractionDetails, peruAttractionDetails, chileAttractionDetails, colombiaAttractionDetails,
+  costaRicaAttractionDetails,
   usaAttractionDetails, canadaAttractionDetails, mexicoAttractionDetails,
   australiaAttractionDetails, newZealandAttractionDetails,
   moroccoAttractionDetails, egyptAttractionDetails, southAfricaAttractionDetails, kenyaAttractionDetails, tanzaniaAttractionDetails,
