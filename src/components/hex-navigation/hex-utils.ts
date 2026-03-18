@@ -16,10 +16,15 @@ export function splitIntoHoneycombRows<T>(items: T[]): T[][] {
   let isWideRow = true;
 
   while (i < items.length) {
+    const remaining = items.length - i;
+    // 남은 아이템이 한 행에 들어가면 마지막 행으로 합침 (작은 꼬리 행 방지)
+    if (remaining <= maxPerRow) {
+      rows.push(items.slice(i));
+      break;
+    }
     const rowSize = isWideRow ? maxPerRow : Math.max(1, maxPerRow - 1);
-    const slice = items.slice(i, i + Math.min(rowSize, items.length - i));
-    if (slice.length > 0) rows.push(slice);
-    i += slice.length;
+    rows.push(items.slice(i, i + rowSize));
+    i += rowSize;
     isWideRow = !isWideRow;
   }
 

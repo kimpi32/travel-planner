@@ -39,8 +39,14 @@ export default function RegionHexGrid({ countrySlug, regions }: RegionHexGridPro
   let i = 0;
   let isWide = true;
   while (i < regions.length) {
+    const remaining = regions.length - i;
+    // 남은 아이템이 한 행에 들어가면 마지막 행으로 합침 (작은 꼬리 행 방지)
+    if (remaining <= maxPerRow) {
+      rows.push(regions.slice(i));
+      break;
+    }
     const size = isWide ? maxPerRow : Math.max(1, maxPerRow - 1);
-    rows.push(regions.slice(i, i + Math.min(size, regions.length - i)));
+    rows.push(regions.slice(i, i + size));
     i += size;
     isWide = !isWide;
   }
